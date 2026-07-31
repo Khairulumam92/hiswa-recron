@@ -1,0 +1,12 @@
+{
+  "id": "havenmeester",
+  "title": "Havenmeester",
+  "category": "Marina & Watersport",
+  "icon": "Anchor",
+  "badgeColor": "blue",
+  "shortDescription": "Jij regelt alle in- en uitvaarten en zorgt voor orde en veiligheid in de jachthaven.",
+  "fullDescription": "Als havenmeester ben jij de baas van de jachthaven. Je wijst aanlegplaatsen toe, controleert veiligheidsprotocollen en bent het eerste aanspreekpunt voor bootgebruikers.",
+  "keySkills": ["Maritieme kennis", "Communicatie", "Veiligheid", "Organisatie"],
+  "careerPath": "MBO Niveau 3/4 Maritieme Techniek → Havenbeheerder",
+  "salaryRange": "€ 2.500 - € 3.800 / maand"
+}

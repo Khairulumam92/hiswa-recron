@@ -1,0 +1,16 @@
+{
+  "id": "S003",
+  "timeOfDay": "14:00 - Middag",
+  "location": "Strand & Recreatiemeer",
+  "title": "Jongeren vervelen zich op het strand!",
+  "description": "Een groep jongeren hangt wat rond bij het meer en vraagt of er vanmiddag nog iets vets te doen is op het water of het strand.",
+  "difficulty": "medium",
+  "correctRoleId": "animator",
+  "options": [
+    { "roleId": "animator", "label": "Outdoor Entertainment Coach die direct een SUP-Rally en Beachvolley toernooi opzet", "isCorrect": true },
+    { "roleId": "bootmonteur", "label": "Sleutels en schroevendraaiers uitdelen", "isCorrect": false },
+    { "roleId": "receptionist", "label": "Vragen of ze stil willen zijn in de lobby", "isCorrect": false },
+    { "roleId": "hafenmeister", "label": "Hun zwemkleding controleren op maritieme regels", "isCorrect": false }
+  ],
+  "feedbackText": "Geweldig! Het SUP-toernooi is een gigantisch succes en iedereen doet enthousiast mee!"
+}

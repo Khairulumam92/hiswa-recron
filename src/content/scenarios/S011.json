@@ -1,0 +1,15 @@
+{
+  "id": "S011",
+  "timeOfDay": "13:00 - Middag",
+  "location": "Camping Terreinen",
+  "title": "De bloembedden zien er verwaarloosd uit!",
+  "description": "Een groep gasten klaagt bij de receptie dat de entree van het camping er slonzig uitziet. De bloemen zijn verdord en het gras is te hoog.",
+  "difficulty": "easy",
+  "correctRoleId": "hovenier",
+  "options": [
+    { "roleId": "hovenier", "label": "Hovenier met snoeischaar en gieter", "isCorrect": true },
+    { "roleId": "marketing", "label": "Marketing voor betere foto's op Instagram", "isCorrect": false },
+    { "roleId": "kok", "label": "Kok om een ontbijt aan te bieden", "isCorrect": false }
+  ],
+  "feedbackText": "Prachtig! De hovenier plant nieuwe bloemen — de ingang ziet er weer top uit!"
+}

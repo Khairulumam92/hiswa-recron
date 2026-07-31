@@ -1,0 +1,16 @@
+{
+  "id": "S010",
+  "timeOfDay": "09:00 - Ochtend",
+  "location": "Kinderclub",
+  "title": "Kinderen verveeld op een regenachtige dag!",
+  "description": "Het regent buiten en de kinderclub zit vol met verveelde kinderen van 6-12 jaar. Ze hebben activiteiten nodig.",
+  "difficulty": "easy",
+  "correctRoleId": "animator",
+  "options": [
+    { "roleId": "animator", "label": "Animator met spelletjes en activiteiten", "isCorrect": true },
+    { "roleId": "bootmonteur", "label": "Bootmonteur met technisch gereedschap", "isCorrect": false },
+    { "roleId": "camping_manager", "label": "Parkmanager voor overleg", "isCorrect": false },
+    { "roleId": "hafenmeister", "label": "Havenmeester van de marina", "isCorrect": false }
+  ],
+  "feedbackText": "Geweldig! De animator organiseert een toffe knutselworkshop — kinderen zijn dolblij!"
+}

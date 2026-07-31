@@ -1,0 +1,16 @@
+{
+  "id": "S006",
+  "timeOfDay": "18:00 - Avond",
+  "location": "Park Management Kantoor",
+  "title": "Seizoensafsluiting en verduurzamingsplan presenteren!",
+  "description": "Er is een strategisch overleg met investeerders en de gemeente over zonnepanelen op de chalets en uitbreiding van de elektrische vaarvloot.",
+  "difficulty": "hard",
+  "correctRoleId": "camping_manager",
+  "options": [
+    { "roleId": "camping_manager", "label": "Park Manager die de toekomstvisie en duurzaamheidsprojecten overtuigend presenteert", "isCorrect": true },
+    { "roleId": "animator", "label": "Bingokaarten uitdelen aan de investeerders", "isCorrect": false },
+    { "roleId": "bootmonteur", "label": "Koffie halen en de bootaccu laten zien", "isCorrect": false },
+    { "roleId": "receptionist", "label": "Sleutelhangers weggeven als souvenir", "isCorrect": false }
+  ],
+  "feedbackText": "Uitstekend! De gemeente en investeerders stemmen enthousiast in met het uitbreidingsplan!"
+}

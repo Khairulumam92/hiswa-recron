@@ -1,0 +1,12 @@
+{
+  "id": "zeilinstructeur",
+  "title": "Zeil & Watersport Instructeur",
+  "category": "Marina & Watersport",
+  "icon": "Anchor",
+  "badgeColor": "blue",
+  "shortDescription": "Jij leert jong en oud veilig zeilen, windsurfen en suppen.",
+  "fullDescription": "Als Zeilinstructeur geef je gepassioneerd les op het water. Je weet precies hoe je wind en golven moet lezen, leert cursisten de juiste knopen en zorgt voor een onvergetelijke vaarervaring.",
+  "keySkills": ["CWI Diplomas", "Leiderschap", "Waterveiligheid", "Geduld"],
+  "careerPath": "MBO Sport & Bewegen / CIOS → Eerste Zeilinstructeur → Zeilschool Manager",
+  "salaryRange": "€ 2.150 - € 3.100 / maand"
+}

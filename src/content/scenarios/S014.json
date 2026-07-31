@@ -1,0 +1,16 @@
+{
+  "id": "S014",
+  "timeOfDay": "17:00 - Middag",
+  "location": "Haven Steiger A",
+  "title": "Drukte bij de aanmeerplaatsen!",
+  "description": "Vijf boten willen tegelijkertijd aanmeren maar er is maar ruimte voor drie. De situatie wordt chaotisch op de steiger.",
+  "difficulty": "hard",
+  "correctRoleId": "hafenmeister",
+  "options": [
+    { "roleId": "hafenmeister", "label": "Havenmeester om de aanmeerplaatsen te regelen", "isCorrect": true },
+    { "roleId": "zeilinstructeur", "label": "Zeilinstructeur om te helpen manoeuvreren", "isCorrect": false },
+    { "roleId": "bootmonteur", "label": "Bootmonteur om touwen vast te maken", "isCorrect": false },
+    { "roleId": "receptionist", "label": "Receptionist om reserveringen te checken", "isCorrect": false }
+  ],
+  "feedbackText": "Uitstekend! De havenmeester regelt alles efficiënt — alle boten liggen veilig aangemeerd!"
+}

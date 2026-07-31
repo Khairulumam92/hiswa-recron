@@ -1,0 +1,12 @@
+{
+  "id": "kok",
+  "title": "Horeca Chef & Kook Specialist",
+  "category": "Food & Beverage",
+  "icon": "Briefcase",
+  "badgeColor": "orange",
+  "shortDescription": "Jij kookt heerlijke streekgerechten voor honderden hongerige parkgasten.",
+  "fullDescription": "Als Park Kok bereid je heerlijke maaltijden in het strandpaviljoen of restaurant. Van verse vissoep en streekproducten tot zonnige terrassnacks.",
+  "keySkills": ["Kooktechniek", "HACCP Veiligheid", "Stressbestendig", "Creativiteit"],
+  "careerPath": "VMBO Horeca → MBO Niveau 3/4 Zelfstandig Werkend Kok → Chef-Kok",
+  "salaryRange": "€ 2.300 - € 3.500 / maand"
+}

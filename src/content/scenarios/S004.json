@@ -1,0 +1,16 @@
+{
+  "id": "S004",
+  "timeOfDay": "15:30 - Namiddag",
+  "location": "Jachthaven Invarend Schip",
+  "title": "Onverwachte zware windstoot bij het afmeren!",
+  "description": "Een groot kajuitjacht komt binnen met windkracht 6. De schipper heeft moeite om schadevrij in de box te sturen.",
+  "difficulty": "medium",
+  "correctRoleId": "hafenmeister",
+  "options": [
+    { "roleId": "hafenmeister", "label": "Havenmeester die via marifoon en op de steiger de lijnen opvangt en de box toewijst", "isCorrect": true },
+    { "roleId": "marketing", "label": "Een Instagram-story maken van de zware wind", "isCorrect": false },
+    { "roleId": "animator", "label": "Een microfoon pakken en een liedje zingen", "isCorrect": false },
+    { "roleId": "camping_manager", "label": "Een jaarplan schrijven voor volgend jaar", "isCorrect": false }
+  ],
+  "feedbackText": "Top! De havenmeester pakt het landvast professioneel aan en het jacht ligt veilig vast."
+}

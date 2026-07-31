@@ -1,0 +1,52 @@
+{
+  "app": {
+    "title": "HISWA-RECRON Career Discovery",
+    "subtitle": "Sektor Watersport & Recreatie",
+    "modeStan": "LOBX Beurs Stan Mode",
+    "modeSchool": "School & Klaslokaal Mode"
+  },
+  "intro": {
+    "badge": "HISWA-RECRON Interactieve Game",
+    "heading": "Eén Dag, Veel Handen",
+    "tagline": "Stel je voor: het is bloedheet hoogseizoen op een top recreatiepark. Er gebeurt van alles tegelijk!",
+    "subtext": "Kun jij in 120 seconden de juiste helden op de juiste plek inzetten? Ontdek welk van de 28 beroepen perfect bij jou past.",
+    "ctaStart": "Start de Uitdaging",
+    "ctaSchool": "Klaslokaal Modus",
+    "stat1Label": "Beroepen in de sector",
+    "stat1Value": "28+",
+    "stat2Label": "Bedrijven in Nederland",
+    "stat2Value": "2.400+",
+    "stat3Label": "Tijd per ronde",
+    "stat3Value": "120s"
+  },
+  "game": {
+    "timerLabel": "Resterende tijd",
+    "scoreLabel": "Punten",
+    "streakLabel": "Streak",
+    "scenarioCount": "Situatie",
+    "selectRoleInstruction": "Kies de beste rol voor dit probleem:",
+    "correctFeedback": "Uitstekend! Dat is de perfecte match!",
+    "incorrectFeedback": "Goede poging, maar een andere rol past beter.",
+    "nextButton": "Volgende Uitdaging",
+    "quickHint": "Tip: Kijk goed naar wat er op de locatie nodig is."
+  },
+  "result": {
+    "badge": "Jouw Carrière Profile",
+    "matchTitle": "Jij bent de ultieme match voor:",
+    "matchScore": "Match Score",
+    "discoveredCount": "Rollen Ontdekt",
+    "overviewTitle": "Waarom dit beroep bij jou past:",
+    "sectorScopeTitle": "De Brede Wereld van Watersport & Recreatie",
+    "sectorScopeDesc": "Van maritieme techniek en event management tot gastvrijheid en natuurbeheer.",
+    "ctaShare": "Deel Jouw Resultaat",
+    "ctaDownload": "Download Badge",
+    "ctaReset": "Speel Opnieuw (Reset)",
+    "linkCopied": "Link gekopieerd naar klembord!"
+  },
+  "idle": {
+    "title": "Ben je er nog?",
+    "desc": "De game wordt over 10 seconden gereset voor de volgende bezoeker.",
+    "continueBtn": "Ik ben er nog!",
+    "resetBtn": "Reset Nu"
+  }
+}

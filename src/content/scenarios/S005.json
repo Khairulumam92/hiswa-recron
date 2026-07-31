@@ -1,0 +1,16 @@
+{
+  "id": "S005",
+  "timeOfDay": "16:45 - Namiddag",
+  "location": "Marketing & Content Office",
+  "title": "Het zonnige weekend komt eraan maar er zijn nog 5 lodges vrij!",
+  "description": "Er wordt fantastisch zomers weer voorspeld voor het komende weekend. De bezetting kan naar 100% als er nu actie wordt ondernomen.",
+  "difficulty": "medium",
+  "correctRoleId": "marketing",
+  "options": [
+    { "roleId": "marketing", "label": "Recreatie Marketeer die een actie-campagne en toffe sfeervideo lanceert op TikTok & Insta", "isCorrect": true },
+    { "roleId": "bootmonteur", "label": "Nieuwe schroeven bestellen voor de motorboot", "isCorrect": false },
+    { "roleId": "hafenmeister", "label": "De steigers nogmaals schoonspuiten", "isCorrect": false },
+    { "roleId": "receptionist", "label": "Wachten tot er iemand toevallig langsloopt", "isCorrect": false }
+  ],
+  "feedbackText": "Binnen 2 uur zijn alle 5 de vrije lodges volgeboekt dankzij de actie-video!"
+}

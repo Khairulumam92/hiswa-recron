@@ -1,0 +1,12 @@
+{
+  "id": "gastenservice",
+  "title": "Gastenservice Medewerker",
+  "category": "Frontoffice & Gastencontact",
+  "icon": "Users",
+  "badgeColor": "blue",
+  "shortDescription": "Jij zorgt ervoor dat elke gast zich thuis voelt en alle vragen beantwoord worden.",
+  "fullDescription": "Als Gastenservice medewerker help je gasten met al hun vragen en wensen tijdens hun verblijf. Van klachten oplossen tot activiteiten aanbevelen — jij bent het gezicht van het park.",
+  "keySkills": ["Communicatie", "Empathie", "Probleemoplossend", "Meertalig"],
+  "careerPath": "MBO Niveau 2-3 Toerisme & Recreatie → Teamleider Gastenservice",
+  "salaryRange": "€ 2.100 - € 2.900 / maand"
+}

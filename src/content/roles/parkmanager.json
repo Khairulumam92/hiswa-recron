@@ -1,0 +1,12 @@
+{
+  "id": "parkmanager",
+  "title": "Parkmanager",
+  "category": "Management & Administratie",
+  "icon": "Briefcase",
+  "badgeColor": "navy",
+  "shortDescription": "Jij bent verantwoordelijk voor de totale bedrijfsvoering van het recreatiepark.",
+  "fullDescription": "Als parkmanager stuur je alle afdelingen aan, bewaakt je de kwaliteit, regelt personeelszaken en zorgt dat het park winstgevend en gastvrij blijft in alle seizoenen.",
+  "keySkills": ["Leiderschap", "Strategisch denken", "Budgetbeheer", "Klanttevredenheid"],
+  "careerPath": "HBO Toerisme & Recreatiemanagement → Directeur Recreatiebedrijf",
+  "salaryRange": "€ 3.500 - € 5.500 / maand"
+}

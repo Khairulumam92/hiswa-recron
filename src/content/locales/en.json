@@ -1,0 +1,52 @@
+{
+  "app": {
+    "title": "HISWA-RECRON Career Discovery",
+    "subtitle": "Water Sports & Recreation Sector",
+    "modeStan": "LOBX Exhibition Booth Mode",
+    "modeSchool": "School & Classroom Mode"
+  },
+  "intro": {
+    "badge": "HISWA-RECRON Interactive Game",
+    "heading": "One Day, Many Hands",
+    "tagline": "Imagine peak season at a top recreation park. Everything is happening at once!",
+    "subtext": "Can you assign the right specialist to the right challenge in 120 seconds? Discover which of the 28 careers fits you best.",
+    "ctaStart": "Start Challenge",
+    "ctaSchool": "Classroom Mode",
+    "stat1Label": "Careers in sector",
+    "stat1Value": "28+",
+    "stat2Label": "Dutch Companies",
+    "stat2Value": "2,400+",
+    "stat3Label": "Round Duration",
+    "stat3Value": "120s"
+  },
+  "game": {
+    "timerLabel": "Time Remaining",
+    "scoreLabel": "Points",
+    "streakLabel": "Streak",
+    "scenarioCount": "Challenge",
+    "selectRoleInstruction": "Choose the best role for this issue:",
+    "correctFeedback": "Excellent! That's the perfect match!",
+    "incorrectFeedback": "Good try, but another role fits better.",
+    "nextButton": "Next Challenge",
+    "quickHint": "Tip: Look closely at what the location needs."
+  },
+  "result": {
+    "badge": "Your Career Profile",
+    "matchTitle": "You are the ultimate match for:",
+    "matchScore": "Match Score",
+    "discoveredCount": "Roles Discovered",
+    "overviewTitle": "Why this career fits you:",
+    "sectorScopeTitle": "The Broad World of Water Sports & Recreation",
+    "sectorScopeDesc": "From maritime engineering and event management to hospitality and eco management.",
+    "ctaShare": "Share Your Result",
+    "ctaDownload": "Download Badge",
+    "ctaReset": "Play Again (Reset)",
+    "linkCopied": "Link copied to clipboard!"
+  },
+  "idle": {
+    "title": "Are you still there?",
+    "desc": "Game will reset in 10 seconds for the next visitor.",
+    "continueBtn": "I'm still here!",
+    "resetBtn": "Reset Now"
+  }
+}

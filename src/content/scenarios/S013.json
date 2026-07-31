@@ -1,0 +1,15 @@
+{
+  "id": "S013",
+  "timeOfDay": "10:00 - Ochtend",
+  "location": "Marketing Kantoor",
+  "title": "De zomercampagne moet live!",
+  "description": "De zomerboekingen lopen achter bij vorig jaar. Het management vraagt om een aantrekkelijke social media campagne voor het weekend.",
+  "difficulty": "medium",
+  "correctRoleId": "marketing",
+  "options": [
+    { "roleId": "marketing", "label": "Marketing medewerker met campagne-ideeën", "isCorrect": true },
+    { "roleId": "camping_manager", "label": "Parkmanager om aanbiedingen te maken", "isCorrect": false },
+    { "roleId": "receptionist", "label": "Receptionist die klanten belt", "isCorrect": false }
+  ],
+  "feedbackText": "Top! De marketing medewerker lanceert een toffe campagne — boekingen stijgen direct!"
+}

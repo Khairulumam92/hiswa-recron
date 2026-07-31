@@ -1,0 +1,16 @@
+{
+  "id": "S015",
+  "timeOfDay": "08:30 - Ochtend",
+  "location": "Parkmanagement",
+  "title": "Drie medewerkers zijn ziek gemeld!",
+  "description": "Deze ochtend zijn er drie medewerkers uitgevallen door ziekte. De dag staat vol met activiteiten en het is hoogseizoen.",
+  "difficulty": "hard",
+  "correctRoleId": "camping_manager",
+  "options": [
+    { "roleId": "camping_manager", "label": "Parkmanager om de bezetting te regelen", "isCorrect": true },
+    { "roleId": "animator", "label": "Animator om extra taken op te pakken", "isCorrect": false },
+    { "roleId": "receptionist", "label": "Receptionist om collega's te bellen", "isCorrect": false },
+    { "roleId": "marketing", "label": "Marketing voor een oproep op social media", "isCorrect": false }
+  ],
+  "feedbackText": "Perfect! De parkmanager regelt snel vervanging — het park draait gewoon op volle toeren!"
+}

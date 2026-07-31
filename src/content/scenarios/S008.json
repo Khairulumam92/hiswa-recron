@@ -1,0 +1,15 @@
+{
+  "id": "S008",
+  "timeOfDay": "14:00 - Middag",
+  "location": "Subtropisch Zwembad",
+  "title": "Het zwembad heeft een pH-probleem!",
+  "description": "De waterteststicker in het zwembad toont een abnormale pH-waarde. Het water ruikt naar chloor en gasten klagen over rode ogen.",
+  "difficulty": "medium",
+  "correctRoleId": "zwembadtechnicus",
+  "options": [
+    { "roleId": "zwembadtechnicus", "label": "Zwembadtechnicus met meetapparatuur", "isCorrect": true },
+    { "roleId": "receptionist", "label": "Receptionist om gasten te informeren", "isCorrect": false },
+    { "roleId": "camping_manager", "label": "Parkmanager om te beslissen", "isCorrect": false }
+  ],
+  "feedbackText": "Goed zo! De zwembadtechnicus past de waterchemie aan — het zwembad is binnen een uur weer perfect!"
+}

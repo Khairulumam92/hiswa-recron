@@ -1,0 +1,12 @@
+{
+  "id": "technischdienst",
+  "title": "Technisch Dienst Medewerker",
+  "category": "Facilitair & Techniek",
+  "icon": "Wrench",
+  "badgeColor": "orange",
+  "shortDescription": "Jij houdt alle gebouwen, apparatuur en infrastructuur in perfecte staat.",
+  "fullDescription": "Als technisch dienst medewerker repareer je kapotte apparatuur, fix je lekken, vervang je lampen en zorg je dat alles veilig en functioneel blijft.",
+  "keySkills": ["Technisch inzicht", "Probleemoplossend", "Handvaardigheid", "Veiligheid"],
+  "careerPath": "MBO Niveau 3 Installatietechniek → Chef Technische Dienst",
+  "salaryRange": "€ 2.300 - € 3.200 / maand"
+}

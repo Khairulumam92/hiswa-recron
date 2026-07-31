@@ -1,0 +1,16 @@
+{
+  "id": "S012",
+  "timeOfDay": "15:30 - Middag",
+  "location": "Jachthaven Kantoor",
+  "title": "Een zeilboot heeft beschadigde apparatuur!",
+  "description": "Een huurzeilboot is teruggekomen met een beschadigd roer. De volgende huurder vertrekt over twee uur.",
+  "difficulty": "medium",
+  "correctRoleId": "bootmonteur",
+  "options": [
+    { "roleId": "bootmonteur", "label": "Bootmonteur met reparatiegereedschap", "isCorrect": true },
+    { "roleId": "hafenmeister", "label": "Havenmeester voor noodprocedures", "isCorrect": false },
+    { "roleId": "zeilinstructeur", "label": "Zeilinstructeur om de schade te beoordelen", "isCorrect": false },
+    { "roleId": "receptionist", "label": "Receptionist om de klant te bellen", "isCorrect": false }
+  ],
+  "feedbackText": "Super! De bootmonteur repareert het roer op tijd — de volgende huurder kan vertrekken!"
+}

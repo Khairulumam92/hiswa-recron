@@ -1,0 +1,16 @@
+{
+  "id": "S007",
+  "timeOfDay": "11:30 - Ochtend",
+  "location": "Camping Receptie",
+  "title": "Gasten weten niet waar hun bungalow is!",
+  "description": "Een groot gezin arriveert bij de receptie. Ze hebben een reservering maar weten niet waar bungalow 47 is en de route op het park is onduidelijk.",
+  "difficulty": "easy",
+  "correctRoleId": "receptionist",
+  "options": [
+    { "roleId": "receptionist", "label": "Receptionist met de plattegrond", "isCorrect": true },
+    { "roleId": "hovenier", "label": "Hovenier die het gras maait", "isCorrect": false },
+    { "roleId": "kok", "label": "Kok uit het restaurant", "isCorrect": false },
+    { "roleId": "animator", "label": "Animator van het kinderprogramma", "isCorrect": false }
+  ],
+  "feedbackText": "Precies! De receptionist checkt ze in en wijst de weg — het gezin loopt blij naar hun bungalow!"
+}

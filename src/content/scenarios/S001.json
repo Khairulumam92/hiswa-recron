@@ -1,0 +1,16 @@
+{
+  "id": "S001",
+  "timeOfDay": "09:15 - Ochtend",
+  "location": "Jachthaven Steiger B",
+  "title": "Motorpech bij vertrek van een zeiljacht!",
+  "description": "Een familie wil net uitvaren voor het weekend, maar de motor van hun huurjacht slaat steeds af en start niet meer. De gasten worden ongeduldig.",
+  "difficulty": "easy",
+  "correctRoleId": "bootmonteur",
+  "options": [
+    { "roleId": "bootmonteur", "label": "Jacht & Maritiem Technicus inschakelen met de gereedschapskist", "isCorrect": true },
+    { "roleId": "marketing", "label": "Een TikTok maken over de prachtige haven", "isCorrect": false },
+    { "roleId": "animator", "label": "De familie uitnodigen voor de kinderdisco", "isCorrect": false },
+    { "roleId": "receptionist", "label": "Nieuwe sleutels geven voor een chalet op het land", "isCorrect": false }
+  ],
+  "feedbackText": "Super! De maritiem technicus vervangt het vuilfilter en de motor draait weer perfect!"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "S009",
+  "timeOfDay": "16:30 - Middag",
+  "location": "Parkrestaurant",
+  "title": "Het restaurant is overbezet vanavond!",
+  "description": "Een groep van 30 mensen heeft spontaan gereserveerd voor vanavond. De keuken heeft extra handen nodig voor de voedselbereiding.",
+  "difficulty": "easy",
+  "correctRoleId": "kok",
+  "options": [
+    { "roleId": "kok", "label": "Kok om extra maaltijden te bereiden", "isCorrect": true },
+    { "roleId": "marketing", "label": "Marketing medewerker voor promotie", "isCorrect": false },
+    { "roleId": "zeilinstructeur", "label": "Zeilinstructeur van de haven", "isCorrect": false },
+    { "roleId": "hovenier", "label": "Hovenier om het terras te versieren", "isCorrect": false }
+  ],
+  "feedbackText": "Lekker! De kok zorgt voor een perfecte maaltijd — gasten zijn super tevreden!"
+}

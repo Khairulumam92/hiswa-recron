@@ -1,0 +1,16 @@
+{
+  "id": "S002",
+  "timeOfDay": "11:30 - Halverwege de Ochtend",
+  "location": "Frontoffice Receptie",
+  "title": "Een internationale stroom gasten arriveert tegelijk!",
+  "description": "Er arriveert een bus met 40 gasten uit Duitsland en Engeland. Er is verwarring over de sleutelafgifte en reserveringscodes.",
+  "difficulty": "easy",
+  "correctRoleId": "receptionist",
+  "options": [
+    { "roleId": "receptionist", "label": "Frontoffice & Gastvrijheid Coördinator die snel en vriendelijk in het Duits/Engels de incheck stroomlijnt", "isCorrect": true },
+    { "roleId": "bootmonteur", "label": "De motorolie van de reddingsboot controleren", "isCorrect": false },
+    { "roleId": "hafenmeister", "label": "Iedereen naar een ligplaats aan de steiger sturen", "isCorrect": false },
+    { "roleId": "animator", "label": "Direct starten met een speurtocht", "isCorrect": false }
+  ],
+  "feedbackText": "Klasse! Binnen 5 minuten is iedereen gastvrij ingecheckt met hun sleutelkaart!"
+}

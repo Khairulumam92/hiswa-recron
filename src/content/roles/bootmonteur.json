@@ -1,0 +1,12 @@
+{
+  "id": "bootmonteur",
+  "title": "Jacht & Maritiem Technicus",
+  "category": "Techniek & Jachtbouw",
+  "icon": "Wrench",
+  "badgeColor": "amber",
+  "shortDescription": "Jij houdt motoren, zeiljachten en elektrische boten in topconditie.",
+  "fullDescription": "Als Maritiem Technicus ben je gek op sleutelen en innovatie. Je onderhoudt inboard motoren, installeert de nieuwste navigatie-elektronica en bereidt jachten voor op het vaarseizoen.",
+  "keySkills": ["Motoronderhoud", "Elektrotechniek", "Problem Solving", "Sleutelen"],
+  "careerPath": "MBO Niveau 3/4 Eerste E-Technicus Onboard → Chef Werkplaats → Marina Eigenaar",
+  "salaryRange": "€ 2.400 - € 3.800 / maand"
+}
