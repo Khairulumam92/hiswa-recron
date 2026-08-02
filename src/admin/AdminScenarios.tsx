@@ -162,42 +162,43 @@ export function AdminScenarios() {
 
       {/* ── TABLE CONTAINER ──────────────────────────────────── */}
       <div className="bg-[#0F243E] border border-[#1B365D] rounded-2xl overflow-hidden shadow-xl">
-        <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto">
+        <table className="w-full text-left text-xs min-w-[600px]">
           <thead>
-            <tr className="border-b border-[#1B365D] bg-[#06152B]/80 text-slate-300 font-heading font-bold uppercase tracking-wider">
-              <th className="p-4">ID</th>
-              <th className="p-4">Titel & Omschrijving</th>
-              <th className="p-4">Locatie</th>
-              <th className="p-4">Moeilijkheid</th>
-              <th className="p-4 text-center">Opties</th>
-              <th className="p-4 text-center">Status</th>
-              <th className="p-4 text-right">Acties</th>
+            <tr className="border-b border-[#1B365D] bg-[#06152B]/80 text-slate-300 font-bold uppercase tracking-wider">
+              <th className="p-3 md:p-4">ID</th>
+              <th className="p-3 md:p-4">Titel</th>
+              <th className="p-3 md:p-4 hidden sm:table-cell">Locatie</th>
+              <th className="p-3 md:p-4 hidden sm:table-cell">Niveau</th>
+              <th className="p-3 md:p-4 text-center">Opties</th>
+              <th className="p-3 md:p-4 text-center hidden sm:table-cell">Status</th>
+              <th className="p-3 md:p-4 text-right">Acties</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[#1B365D]">
             {filtered.map((s) => (
               <tr key={s.id} className="hover:bg-white/5 transition-colors">
-                <td className="p-4 font-mono font-bold text-[#38BDF8]">{s.id}</td>
-                <td className="p-4 max-w-xs">
-                  <div className="font-heading font-bold text-white text-sm leading-tight mb-0.5">{s.title}</div>
-                  <div className="text-[#94A3B8] text-[11px] line-clamp-1">{s.description}</div>
+                <td className="p-3 md:p-4 font-mono font-bold text-[#38BDF8]">{s.id}</td>
+                <td className="p-3 md:p-4 max-w-[200px]">
+                  <div className="font-bold text-white text-sm leading-tight mb-0.5 line-clamp-2">{s.title}</div>
+                  <div className="hidden sm:block text-[#94A3B8] text-[11px] line-clamp-1">{s.description}</div>
                 </td>
-                <td className="p-4 font-medium text-slate-300">
+                <td className="p-3 md:p-4 font-medium text-slate-300 hidden sm:table-cell">
                   <span className="flex items-center gap-1">
                     <span className="material-symbols-outlined text-[14px] text-slate-400">location_on</span>
                     {s.location}
                   </span>
                 </td>
-                <td className="p-4">
-                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-heading font-bold border uppercase tracking-wider ${difficultyColors[s.difficulty] || ''}`}>
+                <td className="p-3 md:p-4 hidden sm:table-cell">
+                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold border uppercase tracking-wider ${difficultyColors[s.difficulty] || ''}`}>
                     {s.difficulty}
                   </span>
                 </td>
-                <td className="p-4 text-center font-mono font-bold text-slate-300">
+                <td className="p-3 md:p-4 text-center font-mono font-bold text-slate-300">
                   {s.options?.length || 0}
                 </td>
-                <td className="p-4 text-center">
-                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-heading font-bold border ${
+                <td className="p-3 md:p-4 text-center hidden sm:table-cell">
+                  <span className={`px-2.5 py-1 rounded-full text-[10px] font-bold border ${
                     s.is_active !== false 
                       ? 'bg-emerald-500/15 text-emerald-400 border-emerald-500/30' 
                       : 'bg-slate-500/15 text-slate-400 border-slate-500/30'
@@ -205,8 +206,8 @@ export function AdminScenarios() {
                     {s.is_active !== false ? 'Actief' : 'Inactief'}
                   </span>
                 </td>
-                <td className="p-4 text-right">
-                  <div className="flex items-center justify-end gap-1.5">
+                <td className="p-3 md:p-4 text-right">
+                  <div className="flex items-center justify-end gap-1">
                     <button
                       onClick={() => handleToggleActive(s.id, s.is_active)}
                       className="p-2 rounded-xl text-slate-300 hover:text-white bg-white/5 hover:bg-white/10 transition-colors"
@@ -244,6 +245,7 @@ export function AdminScenarios() {
             )}
           </tbody>
         </table>
+        </div>
       </div>
     </div>
   );
