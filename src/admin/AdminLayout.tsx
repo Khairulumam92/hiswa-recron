@@ -2,6 +2,11 @@ import { Navigate, Outlet, Link, useLocation, useNavigate } from 'react-router-d
 import { useAuth } from '../lib/auth';
 import { supabase } from '../lib/supabase';
 
+/**
+ * AdminLayout — Executive HISWA-RECRON Admin Panel Layout
+ * High contrast maritime dark theme, clear typography, NO emojis.
+ */
+
 export function AdminLayout() {
   const { user, loading } = useAuth();
   const location = useLocation();
@@ -9,8 +14,11 @@ export function AdminLayout() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0F172A]">
-        <div className="animate-spin h-8 w-8 border-2 border-white/20 border-t-white rounded-full" />
+      <div className="min-h-screen flex items-center justify-center bg-[#06152B]">
+        <div className="flex flex-col items-center gap-3">
+          <div className="animate-spin h-9 w-9 border-3 border-white/20 border-t-[#F47D00] rounded-full" />
+          <span className="text-xs text-slate-400 font-heading font-medium tracking-wider uppercase">Laden beheerderspaneel...</span>
+        </div>
       </div>
     );
   }
@@ -25,8 +33,8 @@ export function AdminLayout() {
   };
 
   const navItems = [
-    { path: '/admin', icon: 'dashboard', label: 'Dashboard' },
-    { path: '/admin/scenarios', icon: 'quiz', label: 'Scenarios' },
+    { path: '/admin', icon: 'space_dashboard', label: 'Dashboard Overview' },
+    { path: '/admin/scenarios', icon: 'format_list_bulleted', label: 'Beheer Scenario\'s' },
   ];
 
   const isActive = (path: string) => {
@@ -35,50 +43,103 @@ export function AdminLayout() {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#0F172A]">
-      <aside className="w-64 bg-[#1E293B] border-r border-slate-700 flex flex-col shrink-0">
-        <div className="p-6 border-b border-slate-700">
-          <h1 className="font-heading font-bold text-lg text-white">
-            HISWA-RECRON
-          </h1>
-          <p className="text-slate-400 text-xs mt-1">Admin Panel</p>
+    <div className="min-h-screen flex bg-[#06152B] text-slate-100 font-sans">
+
+      {/* ── SIDEBAR ──────────────────────────────────────────── */}
+      <aside className="w-64 bg-[#0B1D3A] border-r border-[#1B365D] flex flex-col shrink-0">
+        
+        {/* Brand Header */}
+        <div className="p-6 border-b border-[#1B365D]">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-xl bg-[#F47D00] text-white flex items-center justify-center font-heading font-black text-lg shadow-md shrink-0">
+              J
+            </div>
+            <div>
+              <h1 className="font-heading font-black text-base text-white tracking-tight leading-none">
+                Jong RECRON
+              </h1>
+              <p className="text-[11px] text-[#38BDF8] font-heading font-bold uppercase tracking-wider mt-1">
+                Admin Console
+              </p>
+            </div>
+          </div>
         </div>
 
+        {/* Navigation Menu */}
         <nav className="flex-1 p-4 space-y-1">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className={[
-                'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
-                isActive(item.path)
-                  ? 'bg-indigo-600/30 text-indigo-300 border border-indigo-500/30'
-                  : 'text-slate-400 hover:text-white hover:bg-slate-800',
-              ].join(' ')}
-            >
-              <span className="material-symbols-outlined text-[18px]">{item.icon}</span>
-              {item.label}
-            </Link>
-          ))}
+          <div className="px-3 py-2 text-[10px] font-heading font-bold text-slate-400 uppercase tracking-widest">
+            Hoofdmenu
+          </div>
+          {navItems.map((item) => {
+            const active = isActive(item.path);
+            return (
+              <Link
+                key={item.path}
+                to={item.path}
+                className={[
+                  'flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-heading font-bold transition-all',
+                  active
+                    ? 'bg-[#F47D00]/15 text-[#F47D00] border border-[#F47D00]/30 shadow-sm'
+                    : 'text-slate-300 hover:text-white hover:bg-white/5',
+                ].join(' ')}
+              >
+                <span 
+                  className="material-symbols-outlined text-[18px]"
+                  style={{ fontVariationSettings: `'FILL' ${active ? 1 : 0}` }}
+                >
+                  {item.icon}
+                </span>
+                {item.label}
+              </Link>
+            );
+          })}
+
+          <div className="pt-4 px-3 pb-2 text-[10px] font-heading font-bold text-slate-400 uppercase tracking-widest">
+            Snelkoppelingen
+          </div>
+          <a
+            href="/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-xs font-heading font-semibold text-slate-300 hover:text-white hover:bg-white/5 transition-all"
+          >
+            <span className="material-symbols-outlined text-[18px]">open_in_new</span>
+            Bekijk Hoofdapp
+          </a>
         </nav>
 
-        <div className="p-4 border-t border-slate-700">
-          <div className="text-slate-400 text-xs mb-2 truncate">{user.email}</div>
+        {/* User Footer Profile */}
+        <div className="p-4 border-t border-[#1B365D] bg-[#08172D]">
+          <div className="flex items-center gap-3 mb-3">
+            <div className="w-8 h-8 rounded-full bg-[#003E6F] text-white flex items-center justify-center text-xs font-bold shrink-0 border border-white/20">
+              <span className="material-symbols-outlined text-[16px]">account_circle</span>
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="text-xs font-bold text-white truncate">{user.email}</div>
+              <div className="text-[10px] text-emerald-400 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                Ingelogd als Beheerder
+              </div>
+            </div>
+          </div>
+
           <button
             onClick={handleSignOut}
-            className="w-full flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-slate-400 hover:text-red-400 hover:bg-slate-800 transition-colors"
+            className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl text-xs font-heading font-bold text-slate-300 hover:text-red-400 bg-white/5 hover:bg-red-500/10 border border-white/10 hover:border-red-500/20 transition-all"
           >
             <span className="material-symbols-outlined text-[16px]">logout</span>
-            Sign Out
+            Uitloggen
           </button>
         </div>
       </aside>
 
-      <main className="flex-1 overflow-auto">
-        <div className="p-8 max-w-6xl">
+      {/* ── MAIN CONTENT AREA ────────────────────────────────── */}
+      <main className="flex-1 overflow-auto bg-[#06152B]">
+        <div className="p-8 max-w-7xl mx-auto">
           <Outlet />
         </div>
       </main>
+
     </div>
   );
 }

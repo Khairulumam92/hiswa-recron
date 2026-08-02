@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useGameStore } from '../../game/store/gameStore';
+import { QRCodeModal } from '../navigation/QRCodeModal';
 
 /**
  * IntroScreen — Vibrant Landing Dashboard
@@ -29,6 +30,7 @@ const STATS = [
 export const IntroScreen: React.FC = () => {
   const { startGame, navigateToMap, setMode, mode, contentError } = useGameStore();
   const [hovered, setHovered] = useState<number | null>(null);
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
 
   return (
     <div className="stripe-bg min-h-[calc(100vh-95px)] flex flex-col relative overflow-hidden">
@@ -282,8 +284,11 @@ export const IntroScreen: React.FC = () => {
           </div>
 
           {/* 3. EVENT / SCAN & PLAY CARD */}
-          <div className="card flex items-center gap-4 p-4 bg-white/90 backdrop-blur-md border border-[#003e6f]/15 shadow-md rounded-2xl">
-            <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[#003e6f] text-white shrink-0 shadow-md">
+          <div 
+            onClick={() => setIsQRModalOpen(true)}
+            className="card flex items-center gap-4 p-4 bg-white/90 backdrop-blur-md border border-[#003e6f]/15 shadow-md hover:shadow-lg rounded-2xl cursor-pointer transition-all group"
+          >
+            <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-[#003e6f] text-white shrink-0 shadow-md group-hover:bg-[#F47D00] transition-colors">
               <span className="material-symbols-outlined text-[24px]">qr_code_2</span>
             </div>
             <div className="flex-1">
@@ -295,16 +300,23 @@ export const IntroScreen: React.FC = () => {
               </p>
             </div>
             <button 
-              onClick={navigateToMap}
-              className="btn-ghost text-xs font-bold text-[#003e6f] hover:bg-[#003e6f]/10 rounded-lg px-2.5 py-1.5"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsQRModalOpen(true);
+              }}
+              className="btn-ghost text-xs font-bold text-[#003e6f] hover:bg-[#003e6f]/10 rounded-lg px-2.5 py-1.5 flex items-center gap-1"
             >
-              Kaart openen &rarr;
+              <span className="material-symbols-outlined text-[16px]">qr_code_scanner</span>
+              Scan QR &rarr;
             </button>
           </div>
 
         </div>
 
       </div>
+
+      {/* QR Code Scan Modal */}
+      <QRCodeModal isOpen={isQRModalOpen} onClose={() => setIsQRModalOpen(false)} />
     </div>
   );
 };

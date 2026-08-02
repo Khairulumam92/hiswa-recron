@@ -1,16 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGameStore } from '../../game/store/gameStore';
-
-/**
- * SiteHeader — Inspired by reference image
- *
- * Structure:
- * LEFT:  "Jong RECRON" brand (bold Montserrat)
- * CENTER: Nav tabs — Ontdekken | Mijn Pad | Badges (with icons)
- * RIGHT:  Progress counter + avatar icon
- *
- * The header hides nav tabs when in gameplay to minimize distraction.
- */
+import { QRCodeModal } from '../navigation/QRCodeModal';
 
 type NavTab = {
   id: 'ontdekken' | 'pad' | 'badges';
@@ -26,6 +16,7 @@ const NAV_TABS: NavTab[] = [
 
 export const SiteHeader: React.FC = () => {
   const { navigateToHome, navigateToMap, activeTab, setActiveTab, discoveredRolesCount, phase } = useGameStore();
+  const [isQRModalOpen, setIsQRModalOpen] = useState(false);
   const pct = Math.max(4, Math.round((discoveredRolesCount / 28) * 100));
 
   const showNavTabs = phase === 'intro' || phase === 'map' || phase === 'result';
@@ -126,11 +117,21 @@ export const SiteHeader: React.FC = () => {
             {discoveredRolesCount}/28
           </span>
 
+          {/* QR Code Quick Button */}
+          <button
+            onClick={() => setIsQRModalOpen(true)}
+            className="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 text-[#F47D00] transition-colors"
+            title="Scan & Speel QR-Code"
+          >
+            <span className="material-symbols-outlined text-[20px]">qr_code_2</span>
+          </button>
+
           {/* User avatar icon */}
           <button
-            className="w-8 h-8 rounded-full flex items-center justify-center
-                       bg-white/10 hover:bg-white/20 transition-colors"
-            aria-label="Profiel"
+            onClick={() => setIsQRModalOpen(true)}
+            className="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 hover:bg-white/20 text-white transition-colors"
+            aria-label="Profiel & QR"
+            title="Stand QR & Profiel"
           >
             <span
               className="material-symbols-outlined text-white text-[20px]"
@@ -149,6 +150,9 @@ export const SiteHeader: React.FC = () => {
           style={{ width: `${pct}%`, background: '#a8e86c' }}
         />
       </div>
+
+      {/* QR Code Modal */}
+      <QRCodeModal isOpen={isQRModalOpen} onClose={() => setIsQRModalOpen(false)} />
     </header>
   );
 };
