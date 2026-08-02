@@ -23,6 +23,7 @@ export function AdminScenarioEditor() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [successFlash, setSuccessFlash] = useState(false);
 
   const [formId, setFormId] = useState('');
   const [timeOfDay, setTimeOfDay] = useState('');
@@ -111,17 +112,22 @@ export function AdminScenarioEditor() {
       prev.map((o) => {
         if (o.key !== key) return o;
         const updated = { ...o, [field]: value };
-        if (field === 'isCorrect' && value === true) {
-          prev.forEach((p) => {
-            if (p.key !== key) p.isCorrect = false;
-          });
-        }
         return updated;
       })
     );
+    if (field === 'isCorrect' && value === true) {
+      setOptions((prev) =>
+        prev.map((o) => (o.key === key ? o : { ...o, isCorrect: false }))
+      );
+    }
   };
 
   const correctRoleId = options.find((o) => o.isCorrect)?.roleId || '';
+  const orderedOptions = [...options].sort((a, b) => {
+    if (a.isCorrect) return -1;
+    if (b.isCorrect) return 1;
+    return 0;
+  });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -163,14 +169,18 @@ export function AdminScenarioEditor() {
       }));
 
       await supabase.from('scenario_options').insert(optionRows);
-
-      navigate('/admin/scenarios');
+      setSuccessFlash(true);
+      setTimeout(() => navigate('/admin/scenarios'), 600);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Save failed');
     } finally {
       setSaving(false);
     }
   };
+
+  const filledFields = [formId, timeOfDay, location, title, description, feedbackText].filter(Boolean).length;
+  const totalFields = 6;
+  const progress = Math.round((filledFields / totalFields) * 100);
 
   if (loading) {
     return (
@@ -180,197 +190,451 @@ export function AdminScenarioEditor() {
     );
   }
 
+  const difficultyConfig = {
+    easy: { label: 'Easy', color: 'emerald', icon: 'sentiment_satisfied', desc: 'Pagi — situasi jelas, peran mudah ditebak' },
+    medium: { label: 'Medium', color: 'amber', icon: 'psychology', desc: 'Siang — butuh sedikit pemikiran' },
+    hard: { label: 'Hard', color: 'rose', icon: 'mood_bad', desc: 'Sore — kompleks, perlu strategi' },
+  } as const;
+
+  const dc = difficultyConfig[difficulty];
+
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex items-center justify-between mb-6">
-        <h2 className="font-heading font-bold text-2xl text-white">
-          {isEditing ? 'Edit Scenario' : 'Add Scenario'}
+      {/* Top bar */}
+      <div className="flex items-center gap-3 mb-6">
+        <button
+          type="button"
+          onClick={() => navigate('/admin/scenarios')}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 text-sm hover:text-white hover:bg-slate-800/60 transition-colors"
+        >
+          <span className="material-symbols-outlined text-[16px]">arrow_back</span>
+          Scenarios
+        </button>
+        <span className="text-slate-600">/</span>
+        <h2 className="font-heading font-bold text-xl text-white">
+          {isEditing ? `Edit ${formId}` : 'New Scenario'}
         </h2>
-        <div className="flex items-center gap-3">
+        <div className="ml-auto flex items-center gap-3">
           <button
             type="button"
             onClick={() => navigate('/admin/scenarios')}
-            className="px-4 py-2 rounded-lg text-slate-400 text-sm hover:text-white hover:bg-slate-800 transition-colors"
+            className="px-4 py-2 rounded-lg text-slate-400 text-sm font-medium hover:text-white hover:bg-slate-800 transition-colors"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={saving}
-            className="px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-500 disabled:opacity-50 transition-colors"
+            className="flex items-center gap-2 px-5 py-2 rounded-lg bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg shadow-indigo-600/20"
           >
-            {saving ? 'Saving...' : 'Save'}
+            <span className="material-symbols-outlined text-[18px]">
+              {saving ? 'sync' : 'save'}
+            </span>
+            {saving ? 'Saving...' : 'Save Scenario'}
           </button>
         </div>
       </div>
 
+      {/* Progress bar */}
+      <div className="mb-6 bg-[#1E293B] border border-slate-700/60 rounded-xl p-4">
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-slate-400 text-xs font-medium">Form Completion</span>
+          <span className="text-indigo-400 text-xs font-bold tabular-nums">{progress}%</span>
+        </div>
+        <div className="h-1.5 rounded-full bg-slate-700 overflow-hidden">
+          <div
+            className="h-full rounded-full bg-gradient-to-r from-indigo-500 to-indigo-400 transition-all duration-500"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Error banner */}
       {error && (
-        <div className="mb-4 p-3 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm">
-          {error}
+        <div className="mb-6 p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-start gap-3">
+          <span className="material-symbols-outlined text-[18px] shrink-0 mt-0.5">error</span>
+          <div className="flex-1">{error}</div>
+          <button onClick={() => setError(null)} className="shrink-0 text-red-400/60 hover:text-red-400">
+            <span className="material-symbols-outlined text-[16px]">close</span>
+          </button>
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="space-y-4">
-          <FormField label="Scenario ID">
-            <input
-              value={formId}
-              onChange={(e) => setFormId(e.target.value)}
-              placeholder="S016"
-              disabled={isEditing}
-              className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500 outline-none disabled:opacity-50"
-              required
-            />
-          </FormField>
-
-          <FormField label="Title (NL)">
-            <input
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="Motorpech bij vertrek..."
-              className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500 outline-none"
-              required
-            />
-          </FormField>
-
-          <FormField label="Description (NL)">
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Een familie wil net uitvaren..."
-              rows={3}
-              className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500 outline-none resize-y"
-              required
-            />
-          </FormField>
-
-          <div className="grid grid-cols-2 gap-4">
-            <FormField label="Time of Day (NL)">
-              <input
-                value={timeOfDay}
-                onChange={(e) => setTimeOfDay(e.target.value)}
-                placeholder="09:15 - Ochtend"
-                className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500 outline-none"
-                required
-              />
-            </FormField>
-
-            <FormField label="Location (NL)">
-              <input
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                placeholder="Jachthaven Steiger B"
-                className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500 outline-none"
-                required
-              />
-            </FormField>
+      {/* Success flash */}
+      {successFlash && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+          <div className="bg-[#1E293B] border border-emerald-500/30 rounded-2xl p-8 text-center shadow-2xl animate-in">
+            <div className="w-16 h-16 rounded-full bg-emerald-500/20 flex items-center justify-center mx-auto mb-4">
+              <span className="material-symbols-outlined text-[36px] text-emerald-400">check</span>
+            </div>
+            <p className="text-white font-heading font-bold text-lg mb-1">Scenario Saved</p>
+            <p className="text-slate-400 text-sm">Redirecting to scenarios list...</p>
           </div>
-
-          <FormField label="Difficulty">
-            <select
-              value={difficulty}
-              onChange={(e) => setDifficulty(e.target.value as 'easy' | 'medium' | 'hard')}
-              className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm focus:border-indigo-500 outline-none"
-            >
-              <option value="easy">Easy</option>
-              <option value="medium">Medium</option>
-              <option value="hard">Hard</option>
-            </select>
-          </FormField>
-
-          <FormField label="Feedback Text (NL)">
-            <textarea
-              value={feedbackText}
-              onChange={(e) => setFeedbackText(e.target.value)}
-              placeholder="Super! De technicus vervangt het filter..."
-              rows={3}
-              className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500 outline-none resize-y"
-              required
-            />
-          </FormField>
         </div>
+      )}
 
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <label className="block text-slate-300 text-sm font-medium">Answer Options</label>
-            <button
-              type="button"
-              onClick={addOption}
-              className="flex items-center gap-1 text-xs text-indigo-400 hover:text-indigo-300"
-            >
-              <span className="material-symbols-outlined text-[14px]">add</span>
-              Add Option
-            </button>
-          </div>
-
-          <div className="space-y-3">
-            {options.map((opt, i) => (
-              <div
-                key={opt.key}
-                className={`p-3 rounded-lg border ${opt.isCorrect ? 'border-green-500/50 bg-green-500/5' : 'border-slate-700 bg-[#0F172A]'}`}
-              >
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="text-slate-500 text-xs font-mono w-5">#{i + 1}</span>
-                  <select
-                    value={opt.roleId}
-                    onChange={(e) => updateOption(opt.key, 'roleId', e.target.value)}
-                    className="flex-1 px-2 py-1.5 rounded bg-[#1E293B] border border-slate-600 text-white text-xs focus:border-indigo-500 outline-none"
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+        {/* Left: Main form — 3 cols */}
+        <div className="lg:col-span-3 space-y-6">
+          {/* Scenario identity card */}
+          <div className="bg-[#1E293B] border border-slate-700/60 rounded-xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-slate-700/60 flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-lg bg-indigo-500/15 flex items-center justify-center">
+                <span className="material-symbols-outlined text-[18px] text-indigo-400">description</span>
+              </div>
+              <span className="font-heading font-semibold text-white text-sm">Scenario Details</span>
+            </div>
+            <div className="p-5 space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div className="sm:col-span-1">
+                  <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">ID</label>
+                  <input
+                    value={formId}
+                    onChange={(e) => setFormId(e.target.value)}
+                    placeholder="S016"
+                    disabled={isEditing}
+                    className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500/70 focus:ring-1 focus:ring-indigo-500/30 outline-none disabled:opacity-50 font-mono transition-colors"
                     required
-                  >
-                    <option value="">-- Select Role --</option>
-                    {roles.map((role) => (
-                      <option key={role.id} value={role.id}>
-                        {role.title} ({role.category})
-                      </option>
-                    ))}
-                  </select>
-                  <button
-                    type="button"
-                    onClick={() => updateOption(opt.key, 'isCorrect', !opt.isCorrect)}
-                    className={`flex items-center gap-1 px-2 py-1.5 rounded text-xs font-medium border ${opt.isCorrect ? 'bg-green-600/30 text-green-400 border-green-500/40' : 'bg-slate-800 text-slate-500 border-slate-600 hover:text-green-400'}`}
-                  >
-                    <span className="material-symbols-outlined text-[12px]">
-                      {opt.isCorrect ? 'check_circle' : 'radio_button_unchecked'}
-                    </span>
-                    {opt.isCorrect ? 'Correct' : 'Mark Correct'}
-                  </button>
-                  {options.length > 2 && (
-                    <button
-                      type="button"
-                      onClick={() => removeOption(opt.key)}
-                      className="p-1.5 rounded text-slate-500 hover:text-red-400 hover:bg-slate-800"
-                    >
-                      <span className="material-symbols-outlined text-[14px]">close</span>
-                    </button>
-                  )}
+                  />
                 </div>
+                <div>
+                  <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Time</label>
+                  <input
+                    value={timeOfDay}
+                    onChange={(e) => setTimeOfDay(e.target.value)}
+                    placeholder="09:15 - Ochtend"
+                    className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500/70 focus:ring-1 focus:ring-indigo-500/30 outline-none transition-colors"
+                    required
+                  />
+                </div>
+                <div>
+                  <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Location</label>
+                  <input
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    placeholder="Jachthaven Steiger B"
+                    className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500/70 focus:ring-1 focus:ring-indigo-500/30 outline-none transition-colors"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Title</label>
                 <input
-                  value={opt.label}
-                  onChange={(e) => updateOption(opt.key, 'label', e.target.value)}
-                  placeholder="Jacht & Maritiem Technicus inschakelen..."
-                  className="w-full px-3 py-1.5 rounded bg-[#1E293B] border border-slate-600 text-white text-xs placeholder-slate-500 focus:border-indigo-500 outline-none"
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Motorpech bij vertrek van een zeiljacht!"
+                  className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500/70 focus:ring-1 focus:ring-indigo-500/30 outline-none transition-colors"
                   required
                 />
               </div>
-            ))}
+
+              <div>
+                <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Description</label>
+                <textarea
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  placeholder="Een familie wil net uitvaren voor het weekend..."
+                  rows={3}
+                  className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500/70 focus:ring-1 focus:ring-indigo-500/30 outline-none resize-y transition-colors"
+                  required
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Difficulty</label>
+                  <div className="flex gap-2">
+                    {(Object.keys(difficultyConfig) as Array<'easy' | 'medium' | 'hard'>).map((key) => {
+                      const item = difficultyConfig[key];
+                      const active = difficulty === key;
+                      return (
+                        <button
+                          key={key}
+                          type="button"
+                          onClick={() => setDifficulty(key)}
+                          className={`flex-1 flex flex-col items-center gap-1 px-3 py-2.5 rounded-lg border text-xs font-semibold transition-all ${
+                            active
+                              ? `border-${item.color}-500/50 bg-${item.color}-500/10 text-${item.color}-300 shadow-sm`
+                              : 'border-slate-700 bg-[#0F172A] text-slate-500 hover:border-slate-600 hover:text-slate-400'
+                          }`}
+                        >
+                          <span className={`material-symbols-outlined text-[16px] ${active ? `text-${item.color}-400` : ''}`}>
+                            {item.icon}
+                          </span>
+                          {item.label}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <p className="text-slate-500 text-[11px] mt-1.5 flex items-center gap-1">
+                    <span className={`material-symbols-outlined text-[12px] text-${dc.color}-400`}>{dc.icon}</span>
+                    {dc.desc}
+                  </p>
+                </div>
+
+                <div>
+                  <label className="block text-slate-400 text-xs font-semibold uppercase tracking-wider mb-1.5">Feedback</label>
+                  <textarea
+                    value={feedbackText}
+                    onChange={(e) => setFeedbackText(e.target.value)}
+                    placeholder="Super! De technicus vervangt het filter..."
+                    rows={3}
+                    className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500/70 focus:ring-1 focus:ring-indigo-500/30 outline-none resize-y transition-colors"
+                    required
+                  />
+                </div>
+              </div>
+            </div>
           </div>
 
-          {!correctRoleId && (
-            <p className="mt-2 text-xs text-amber-400">
-              Mark one option as correct above.
-            </p>
-          )}
+          {/* Options card */}
+          <div className="bg-[#1E293B] border border-slate-700/60 rounded-xl overflow-hidden">
+            <div className="px-5 py-3 border-b border-slate-700/60 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-amber-500/15 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[18px] text-amber-400">list_alt</span>
+                </div>
+                <span className="font-heading font-semibold text-white text-sm">Answer Options</span>
+                <span className="text-slate-600 text-xs">{options.length} options</span>
+              </div>
+              <button
+                type="button"
+                onClick={addOption}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-indigo-600/20 border border-indigo-500/30 text-indigo-300 text-xs font-semibold hover:bg-indigo-600/30 hover:border-indigo-500/50 transition-colors"
+              >
+                <span className="material-symbols-outlined text-[14px]">add</span>
+                Add Option
+              </button>
+            </div>
+            <div className="p-5 space-y-3">
+              {orderedOptions.map((opt, displayIndex) => {
+                const matchedRole = roles.find((r) => r.id === opt.roleId);
+                return (
+                  <div
+                    key={opt.key}
+                    className={`group relative rounded-xl border-2 transition-all duration-200 ${
+                      opt.isCorrect
+                        ? 'border-emerald-500/40 bg-emerald-500/[0.04] shadow-sm shadow-emerald-500/5'
+                        : 'border-slate-700/60 bg-[#0F172A] hover:border-slate-600'
+                    }`}
+                  >
+                    {opt.isCorrect && (
+                      <div className="absolute -top-2.5 -left-2.5 w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center shadow-lg shadow-emerald-500/30">
+                        <span className="material-symbols-outlined text-[12px] text-white font-bold">check</span>
+                      </div>
+                    )}
+
+                    <div className="p-4">
+                      <div className="flex items-start gap-3">
+                        <div className={`shrink-0 w-8 h-8 rounded-lg flex items-center justify-center text-xs font-bold font-mono ${
+                          opt.isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-800 text-slate-600'
+                        }`}>
+                          {displayIndex + 1}
+                        </div>
+
+                        <div className="flex-1 space-y-2.5 min-w-0">
+                          <select
+                            value={opt.roleId}
+                            onChange={(e) => updateOption(opt.key, 'roleId', e.target.value)}
+                            className="w-full px-3 py-2 rounded-lg bg-[#1E293B] border border-slate-600 text-white text-sm focus:border-indigo-500/70 focus:ring-1 focus:ring-indigo-500/30 outline-none transition-colors"
+                            required
+                          >
+                            <option value="">Select a role...</option>
+                            {roles.map((role) => (
+                              <option key={role.id} value={role.id}>
+                                {role.title}
+                              </option>
+                            ))}
+                          </select>
+
+                          {matchedRole && (
+                            <div className="flex items-center gap-2 px-2 py-1 rounded-md bg-slate-800/60 border border-slate-700/60 w-fit">
+                              <span className="w-2 h-2 rounded-full" style={{
+                                backgroundColor: {
+                                  cyan: '#22d3ee', amber: '#f59e0b', blue: '#3b82f6',
+                                  emerald: '#10b981', purple: '#a855f7', rose: '#f43f5e',
+                                  orange: '#f97316', navy: '#6366f1', green: '#22c55e',
+                                }[matchedRole.badgeColor] || '#64748b'
+                              }} />
+                              <span className="text-slate-400 text-[11px]">{matchedRole.category}</span>
+                            </div>
+                          )}
+
+                          <input
+                            value={opt.label}
+                            onChange={(e) => updateOption(opt.key, 'label', e.target.value)}
+                            placeholder="Jacht & Maritiem Technicus inschakelen met de gereedschapskist"
+                            className="w-full px-3 py-2 rounded-lg bg-[#0F172A] border border-slate-600 text-white text-sm placeholder-slate-500 focus:border-indigo-500/70 focus:ring-1 focus:ring-indigo-500/30 outline-none transition-colors"
+                            required
+                          />
+                        </div>
+
+                        <div className="flex flex-col items-center gap-1 shrink-0">
+                          <button
+                            type="button"
+                            onClick={() => updateOption(opt.key, 'isCorrect', !opt.isCorrect)}
+                            className={`p-2 rounded-lg border transition-all ${
+                              opt.isCorrect
+                                ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400'
+                                : 'border-slate-600 text-slate-600 hover:border-emerald-500/30 hover:text-emerald-400 hover:bg-emerald-500/10'
+                            }`}
+                            title={opt.isCorrect ? 'Correct answer' : 'Mark as correct'}
+                          >
+                            <span className="material-symbols-outlined text-[18px]">
+                              {opt.isCorrect ? 'verified' : 'check_circle'}
+                            </span>
+                          </button>
+
+                          {options.length > 2 && (
+                            <button
+                              type="button"
+                              onClick={() => removeOption(opt.key)}
+                              className="p-2 rounded-lg border border-slate-600 text-slate-600 hover:border-red-500/40 hover:text-red-400 hover:bg-red-500/10 transition-all opacity-0 group-hover:opacity-100"
+                              title="Remove option"
+                            >
+                              <span className="material-symbols-outlined text-[16px]">close</span>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+
+              {!correctRoleId && orderedOptions.length > 0 && (
+                <div className="flex items-center gap-2 p-4 rounded-xl bg-amber-500/5 border border-amber-500/15 text-amber-400/80 text-sm">
+                  <span className="material-symbols-outlined text-[18px] shrink-0">info</span>
+                  Click the checkmark button on one option to mark it as the correct answer.
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Preview panel — 2 cols */}
+        <div className="lg:col-span-2">
+          <div className="sticky top-8 space-y-6">
+            {/* Preview card */}
+            <div className="bg-[#1E293B] border border-slate-700/60 rounded-xl overflow-hidden">
+              <div className="px-5 py-3 border-b border-slate-700/60 flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-lg bg-cyan-500/15 flex items-center justify-center">
+                  <span className="material-symbols-outlined text-[18px] text-cyan-400">preview</span>
+                </div>
+                <span className="font-heading font-semibold text-white text-sm">Live Preview</span>
+              </div>
+
+              <div className="p-5">
+                {!title && !description ? (
+                  <div className="text-center py-10 text-slate-500">
+                    <span className="material-symbols-outlined text-[40px] mb-3 block opacity-40">edit_note</span>
+                    <p className="text-sm">Fill in the form to see a preview</p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {/* Simulated game card */}
+                    <div className="rounded-xl bg-[#0F172A] border border-slate-700/60 overflow-hidden">
+                      <div className="px-4 py-2.5 flex items-center justify-between border-b border-slate-700/40 bg-slate-800/30">
+                        <div className="flex items-center gap-2">
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase ${
+                            difficulty === 'easy' ? 'bg-emerald-500/20 text-emerald-400' :
+                            difficulty === 'medium' ? 'bg-amber-500/20 text-amber-400' :
+                            'bg-rose-500/20 text-rose-400'
+                          }`}>
+                            {difficulty}
+                          </span>
+                          <span className="text-slate-400 text-[11px] font-medium">{timeOfDay || '09:15'}</span>
+                        </div>
+                        <span className="text-slate-500 text-[10px] font-mono">{location || 'Jachthaven'}</span>
+                      </div>
+                      <div className="p-4">
+                        <h4 className="text-white font-heading font-bold text-sm mb-1.5">
+                          {title || 'Title will appear here'}
+                        </h4>
+                        <p className="text-slate-400 text-xs leading-relaxed">
+                          {description || 'Description will appear here'}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Simulated options */}
+                    <div className="space-y-2">
+                      <p className="text-slate-500 text-[10px] font-semibold uppercase tracking-wider">
+                        Answer Options ({orderedOptions.length})
+                      </p>
+                      {orderedOptions.map((opt, i) => {
+                        const matchedRole = roles.find((r) => r.id === opt.roleId);
+                        return (
+                          <div
+                            key={opt.key}
+                            className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border text-xs transition-all ${
+                              opt.isCorrect
+                                ? 'border-emerald-500/30 bg-emerald-500/5'
+                                : 'border-slate-700/40 bg-[#0F172A]'
+                            }`}
+                          >
+                            <span className={`w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0 ${
+                              opt.isCorrect ? 'bg-emerald-500/20 text-emerald-400' : 'bg-slate-700/50 text-slate-500'
+                            }`}>
+                              {String.fromCharCode(65 + i)}
+                            </span>
+                            <div className="flex-1 min-w-0">
+                              <span className="text-slate-300 truncate block">
+                                {opt.label || 'Option label...'}
+                              </span>
+                              {matchedRole && (
+                                <span className="text-slate-500 text-[10px]">{matchedRole.title}</span>
+                              )}
+                            </div>
+                            {opt.isCorrect && (
+                              <span className="material-symbols-outlined text-[14px] text-emerald-400 shrink-0">check_circle</span>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+
+                    {/* Simulated feedback */}
+                    {feedbackText && (
+                      <div className="px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700/40 flex items-start gap-2">
+                        <span className="material-symbols-outlined text-[14px] text-amber-400 shrink-0 mt-0.5">campaign</span>
+                        <p className="text-slate-400 text-[11px] leading-relaxed italic">{feedbackText}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Stats card */}
+            <div className="bg-[#1E293B] border border-slate-700/60 rounded-xl p-5">
+              <h4 className="font-heading font-semibold text-white text-sm mb-4">Scenario Stats</h4>
+              <div className="grid grid-cols-2 gap-3">
+                <div className="rounded-lg bg-[#0F172A] border border-slate-700/60 p-3 text-center">
+                  <div className="text-indigo-400 text-lg font-heading font-bold tabular-nums">{options.length}</div>
+                  <div className="text-slate-500 text-[11px]">Options</div>
+                </div>
+                <div className="rounded-lg bg-[#0F172A] border border-slate-700/60 p-3 text-center">
+                  <div className={`text-lg font-heading font-bold tabular-nums ${correctRoleId ? 'text-emerald-400' : 'text-slate-600'}`}>
+                    {correctRoleId ? 'Yes' : 'No'}
+                  </div>
+                  <div className="text-slate-500 text-[11px]">Correct Answer Set</div>
+                </div>
+                <div className="rounded-lg bg-[#0F172A] border border-slate-700/60 p-3 text-center">
+                  <div className="text-cyan-400 text-lg font-heading font-bold tabular-nums">{title.length}</div>
+                  <div className="text-slate-500 text-[11px]">Title Chars</div>
+                </div>
+                <div className="rounded-lg bg-[#0F172A] border border-slate-700/60 p-3 text-center">
+                  <div className="text-amber-400 text-lg font-heading font-bold tabular-nums">{description.length}</div>
+                  <div className="text-slate-500 text-[11px]">Description Chars</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </form>
-  );
-}
-
-function FormField({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <div>
-      <label className="block text-slate-300 text-sm font-medium mb-1.5">{label}</label>
-      {children}
-    </div>
   );
 }

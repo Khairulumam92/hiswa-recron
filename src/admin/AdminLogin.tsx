@@ -63,7 +63,7 @@ export function AdminLogin() {
               onChange={(e) => setEmail(e.target.value)}
               required
               className="w-full px-3 py-2.5 rounded-lg bg-[#0F172A] border border-slate-700 text-white text-sm placeholder-slate-500 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none"
-              placeholder="lucie@hiswarecron.nl"
+              placeholder="admin@mail.com"
             />
           </div>
 
