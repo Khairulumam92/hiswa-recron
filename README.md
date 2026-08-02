@@ -3,7 +3,7 @@
 > **"Beleef de Recreatiebranche"** — A gamified career discovery experience for youth aged 14–20.
 > Built for the UMM Hackathon (72-hour challenge), partnered with **Helden Inc**.
 
-**Live Preview:** [hiswa-recron.vercel.app](https://hiswa-recron-omjvaahbp-khairulumams-projects.vercel.app/)
+**Live Preview:** [hiswa-recron.vercel.app](https://hiswa-recron.vercel.app/)
 
 ---
 

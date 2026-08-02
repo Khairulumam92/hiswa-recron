@@ -1,9 +1,9 @@
 {
   "app": {
     "title": "HISWA-RECRON Career Discovery",
-    "subtitle": "Sektor Watersport & Recreatie",
-    "modeStan": "LOBX Beurs Stan Mode",
-    "modeSchool": "School & Klaslokaal Mode"
+    "subtitle": "Sector Watersport & Recreatie",
+    "modeStan": "LOBX Beurs Stand",
+    "modeSchool": "School & Klaslokaal"
   },
   "intro": {
     "badge": "HISWA-RECRON Interactieve Game",
@@ -11,7 +11,7 @@
     "tagline": "Stel je voor: het is bloedheet hoogseizoen op een top recreatiepark. Er gebeurt van alles tegelijk!",
     "subtext": "Kun jij in 120 seconden de juiste helden op de juiste plek inzetten? Ontdek welk van de 28 beroepen perfect bij jou past.",
     "ctaStart": "Start de Uitdaging",
-    "ctaSchool": "Klaslokaal Modus",
+    "ctaSchool": "Klaslokaalmodus",
     "stat1Label": "Beroepen in de sector",
     "stat1Value": "28+",
     "stat2Label": "Bedrijven in Nederland",
