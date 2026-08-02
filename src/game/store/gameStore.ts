@@ -46,6 +46,9 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
   matchScorePercentage: 0,
 
   isIdleOverlayVisible: false,
+  activeTab: 'ontdekken',
+
+  setActiveTab: (activeTab) => set({ activeTab }),
 
   setMode: (mode: GameMode) => {
     set({
@@ -205,5 +208,7 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
   },
 
   showIdleOverlay: () => set({ isIdleOverlayVisible: true }),
-  dismissIdleOverlay: () => set({ isIdleOverlayVisible: false })
+  dismissIdleOverlay: () => set({ isIdleOverlayVisible: false }),
+  navigateToMap: () => set({ phase: 'map' }),
+  navigateToHome: () => set({ phase: 'intro' })
 }));

@@ -1,4 +1,4 @@
-export type GamePhase = 'intro' | 'playing' | 'result';
+export type GamePhase = 'intro' | 'map' | 'playing' | 'result';
 export type GameMode = 'stan' | 'school';
 
 export interface RoleData {
@@ -76,6 +76,10 @@ export interface GameStoreState {
   // Idle Overlay State
   isIdleOverlayVisible: boolean;
 
+  // Active Tab State ('ontdekken' | 'pad' | 'badges')
+  activeTab: 'ontdekken' | 'pad' | 'badges';
+  setActiveTab: (tab: 'ontdekken' | 'pad' | 'badges') => void;
+
   // Actions
   setMode: (mode: GameMode) => void;
   setSoundEnabled: (enabled: boolean) => void;
@@ -89,4 +93,6 @@ export interface GameStoreState {
   resetGame: () => void;
   showIdleOverlay: () => void;
   dismissIdleOverlay: () => void;
+  navigateToMap: () => void;
+  navigateToHome: () => void;
 }

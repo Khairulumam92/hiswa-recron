@@ -13,13 +13,14 @@ export default async function handler(req: any, res: any) {
       process.env.SUPABASE_SERVICE_ROLE_KEY || ''
     );
 
+    const eventData: Record<string, unknown> = {};
+    if (mode) eventData.mode = mode;
+    if (matchedRoleId) eventData.role_id = matchedRoleId;
+    if (score !== undefined) eventData.score = score;
+
     const { error } = await supabase.from('aggregate_stats').insert({
       event_type: eventType || 'unknown',
-      event_data: {
-        mode: mode || null,
-        role_id: matchedRoleId || null,
-        score: score || null,
-      },
+      event_data: eventData,
     });
 
     if (error) throw error;

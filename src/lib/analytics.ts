@@ -41,7 +41,7 @@ export function logAnalyticsQueue(): void {
 
 export async function logGameCompletion(mode: string, matchedRoleId: string, score: number) {
   const event: AnalyticsEvent = {
-    eventType: 'game_completed',
+    eventType: 'session_completed',
     mode,
     matchedRoleId,
     score,
@@ -57,7 +57,7 @@ export async function logGameCompletion(mode: string, matchedRoleId: string, sco
 
 export async function logGameStarted(mode: string) {
   const event: AnalyticsEvent = {
-    eventType: 'game_started',
+    eventType: 'session_started',
     mode,
     timestamp: Date.now()
   };

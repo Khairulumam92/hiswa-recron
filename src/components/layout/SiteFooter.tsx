@@ -13,8 +13,8 @@ import { useGameStore } from '../../game/store/gameStore';
 export const SiteFooter: React.FC = () => {
   const { phase } = useGameStore();
 
-  // Don't render footer during active gameplay
-  if (phase === 'playing') return null;
+  // Don't render footer during active gameplay or map view
+  if (phase === 'playing' || phase === 'map') return null;
 
   return (
     <footer className="site-footer" role="contentinfo">

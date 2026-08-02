@@ -34,12 +34,12 @@ export function AdminDashboard() {
       const modeCounts: Record<string, number> = {};
 
       sessions?.forEach((s) => {
-        const data = s.event_data as Record<string, unknown> || {};
+        const data = (s.event_data as Record<string, unknown>) || {};
         if (s.event_type === 'session_started') {
           const mode = (data.mode as string) || 'unknown';
           modeCounts[mode] = (modeCounts[mode] || 0) + 1;
         }
-        if (s.event_type === 'role_selected' && data.role_id) {
+        if (s.event_type === 'session_completed' && data.role_id) {
           const rid = data.role_id as string;
           const rtitle = (data.role_title as string) || rid;
           if (!rolesCount[rid]) rolesCount[rid] = { title: rtitle, count: 0 };

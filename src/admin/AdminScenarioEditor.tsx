@@ -133,8 +133,9 @@ export function AdminScenarioEditor() {
     setSaving(true);
     setError(null);
 
+    const scenarioId = formId || `S${Date.now()}`;
     const scenarioPayload = {
-      id: formId || `S${Date.now()}`,
+      id: scenarioId,
       time_of_day: timeOfDay,
       location,
       title,
@@ -154,7 +155,7 @@ export function AdminScenarioEditor() {
       }
 
       const optionRows = options.map((opt, i) => ({
-        scenario_id: formId,
+        scenario_id: scenarioId,
         role_id: opt.roleId,
         label: opt.label,
         is_correct: opt.isCorrect,

@@ -45,6 +45,37 @@ const DIFFICULTY_CONFIG = {
   hard:   { label: 'Moeilijk',  color: '#8b0000', bg: '#fde8e6' },
 };
 
+/** Map scenario locations to their isometric scene illustrations */
+const LOCATION_IMAGES: Record<string, string> = {
+  // Marina & Watersport
+  'Jachthaven Steiger B':      '/assets/images/scene_marina.jpg',
+  'Haven Steiger A':           '/assets/images/scene_marina.jpg',
+  'Jachthaven Kantoor':        '/assets/images/scene_marina.jpg',
+  'Jachthaven Invarend Schip': '/assets/images/scene_marina.jpg',
+  // Zwembad
+  'Subtropisch Zwembad':       '/assets/images/scene_pool.jpg',
+  // Strand
+  'Strand & Recreatiemeer':    '/assets/images/scene_pool.jpg',
+  // Restaurant
+  'Parkrestaurant':            '/assets/images/scene_restaurant.jpg',
+  // Kinderclub
+  'Kinderclub':                '/assets/images/scene_playground.jpg',
+  // Camping
+  'Camping Receptie':          '/assets/images/scene_camping.jpg',
+  'Camping Terreinen':         '/assets/images/scene_camping.jpg',
+  // Receptie & Management
+  'Frontoffice Receptie':      '/assets/images/scene_reception.jpg',
+  'Park Management Kantoor':   '/assets/images/scene_reception.jpg',
+  'Parkmanagement':            '/assets/images/scene_reception.jpg',
+  // Marketing
+  'Marketing Kantoor':         '/assets/images/scene_reception.jpg',
+  'Marketing & Content Office':'/assets/images/scene_reception.jpg',
+};
+
+const getSceneImage = (location: string): string => {
+  return LOCATION_IMAGES[location] ?? '/assets/images/scene_reception.jpg';
+};
+
 export const ScenarioCard: React.FC = () => {
   const {
     scenarios, currentScenarioIndex,
@@ -188,6 +219,28 @@ export const ScenarioCard: React.FC = () => {
             <p className="text-[#384454] text-[15px] leading-relaxed">
               {scenario.description}
             </p>
+          </div>
+
+          {/* Scene illustration — isometric pixel art per location */}
+          <div className="rounded-xl overflow-hidden border border-[#dde1e9] shadow-sm aspect-video relative">
+            <img
+              src={getSceneImage(scenario.location)}
+              alt={`Scene: ${scenario.location}`}
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
+            <div className="absolute bottom-0 left-0 right-0 flex items-center justify-between
+                            px-3 py-1.5 bg-white/90 backdrop-blur-sm border-t border-[#dde1e9] text-[11px]">
+              <span className="flex items-center gap-1 font-bold text-[#5e6e85]">
+                <span className="material-symbols-outlined text-[13px]">location_on</span>
+                {scenario.location}
+              </span>
+              <span className="flex items-center gap-1 font-bold text-[#003e6f]">
+                <span className="material-symbols-outlined text-[13px]"
+                  style={{ fontVariationSettings: "'FILL' 1" }}>emoji_events</span>
+                {score} PTS
+              </span>
+            </div>
           </div>
 
           {/* Urgency alert — only shows when time is low */}
