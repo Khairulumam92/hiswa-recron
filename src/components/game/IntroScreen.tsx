@@ -31,8 +31,15 @@ const STATS = [
 ];
 
 export const IntroScreen: React.FC = () => {
-  const { startGame, setMode, mode } = useGameStore();
+  const { startGame, setMode, mode, contentError } = useGameStore();
   const [hovered, setHovered] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleStart = async () => {
+    setIsLoading(true);
+    await startGame();
+    setIsLoading(false);
+  };
 
   return (
     <div className="stripe-bg min-h-[calc(100vh-95px)] flex flex-col">
@@ -112,16 +119,17 @@ export const IntroScreen: React.FC = () => {
           </div>
 
           {/* CTA */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-4">
             <button
-              onClick={startGame}
+              onClick={handleStart}
+              disabled={isLoading}
               id="start-game-btn"
-              className="btn-primary animate-pulse-glow"
+              className="btn-primary animate-pulse-glow disabled:opacity-50 disabled:cursor-wait"
             >
-              Start het spel
+              {isLoading ? 'Laden...' : 'Start het spel'}
               <span className="material-symbols-outlined text-[22px]"
                 style={{ fontVariationSettings: "'wght' 600" }}>
-                play_arrow
+                {isLoading ? 'hourglass_top' : 'play_arrow'}
               </span>
             </button>
             <p className="text-[#5e6e85] text-sm flex items-center gap-1.5">
@@ -130,6 +138,12 @@ export const IntroScreen: React.FC = () => {
               Geen account nodig
             </p>
           </div>
+
+          {contentError && (
+            <div className="mb-4 p-3 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm">
+              {contentError}
+            </div>
+          )}
 
           {/* Stats bar — like Booking.com social proof */}
           <div className="flex items-center gap-0 border border-[#dde1e9] rounded-xl bg-white overflow-hidden shadow-sm w-fit">

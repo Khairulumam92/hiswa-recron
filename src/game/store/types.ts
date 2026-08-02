@@ -30,6 +30,7 @@ export interface ScenarioData {
   correctRoleId: string;
   options: ScenarioOption[];
   feedbackText: string;
+  is_active?: boolean;
 }
 
 export interface ScenarioPlayRecord {
@@ -65,6 +66,8 @@ export interface GameStoreState {
   // Records & Matched Data
   scenarios: ScenarioData[];
   roles: RoleData[];
+  isContentReady: boolean;
+  contentError: string | null;
   selectedRoleCounts: Record<string, number>;
   playHistory: ScenarioPlayRecord[];
   matchedRole: RoleData | null;
@@ -77,7 +80,7 @@ export interface GameStoreState {
   setMode: (mode: GameMode) => void;
   setSoundEnabled: (enabled: boolean) => void;
   setTheme: (theme: 'dark' | 'light') => void;
-  startGame: () => void;
+  startGame: () => Promise<void>;
   answerScenario: (option: ScenarioOption) => void;
   dismissRoleReveal: () => void;
   nextScenario: () => void;

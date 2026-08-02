@@ -1,78 +1,9 @@
 import { create } from 'zustand';
-import { GameStoreState, GameMode, ScenarioOption, RoleData, ScenarioData } from './types';
+import { GameStoreState, GameMode, ScenarioOption, ScenarioData } from './types';
 import { GAME_CONSTANTS } from '../../lib/constants';
 import { calculateTopMatchedRole } from '../engine/ResultCalculator';
 import { logGameCompletion } from '../../lib/analytics';
-
-// Import Static Roles
-import receptionist from '../../content/roles/receptionist.json';
-import bootmonteur from '../../content/roles/bootmonteur.json';
-import marketing from '../../content/roles/marketing.json';
-import animator from '../../content/roles/animator.json';
-import hafenmeister from '../../content/roles/hafenmeister.json';
-import campingManager from '../../content/roles/camping_manager.json';
-import zwembadtechnicus from '../../content/roles/zwembadtechnicus.json';
-import hovenier from '../../content/roles/hovenier.json';
-import zeilinstructeur from '../../content/roles/zeilinstructeur.json';
-import kok from '../../content/roles/kok.json';
-import gastenservice from '../../content/roles/gastenservice.json';
-import socialmedia from '../../content/roles/socialmedia.json';
-import evenementenplanner from '../../content/roles/evenementenplanner.json';
-import technischdienst from '../../content/roles/technischdienst.json';
-import havenmeester from '../../content/roles/havenmeester.json';
-import parkmanager from '../../content/roles/parkmanager.json';
-// Import Static Scenarios
-import S001 from '../../content/scenarios/S001.json';
-import S002 from '../../content/scenarios/S002.json';
-import S003 from '../../content/scenarios/S003.json';
-import S004 from '../../content/scenarios/S004.json';
-import S005 from '../../content/scenarios/S005.json';
-import S006 from '../../content/scenarios/S006.json';
-import S007 from '../../content/scenarios/S007.json';
-import S008 from '../../content/scenarios/S008.json';
-import S009 from '../../content/scenarios/S009.json';
-import S010 from '../../content/scenarios/S010.json';
-import S011 from '../../content/scenarios/S011.json';
-import S012 from '../../content/scenarios/S012.json';
-import S013 from '../../content/scenarios/S013.json';
-import S014 from '../../content/scenarios/S014.json';
-import S015 from '../../content/scenarios/S015.json';
-const ALL_ROLES: RoleData[] = [
-  receptionist,
-  bootmonteur,
-  marketing,
-  animator,
-  hafenmeister,
-  campingManager,
-  zwembadtechnicus,
-  hovenier,
-  zeilinstructeur,
-  kok,
-  gastenservice,
-  socialmedia,
-  evenementenplanner,
-  technischdienst,
-  havenmeester,
-  parkmanager
-] as RoleData[];
-
-const ALL_SCENARIOS: ScenarioData[] = [
-  S001,
-  S002,
-  S003,
-  S004,
-  S005,
-  S006,
-  S007,
-  S008,
-  S009,
-  S010,
-  S011,
-  S012,
-  S013,
-  S014,
-  S015
-] as ScenarioData[];
+import { fetchRoles, fetchScenarios } from '../../lib/api';
 
 function shuffleArray<T>(array: T[]): T[] {
   const arr = [...array];
@@ -99,8 +30,10 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
 
   activeRoleReveal: null,
 
-  scenarios: ALL_SCENARIOS,
-  roles: ALL_ROLES,
+  scenarios: [] as ScenarioData[],
+  roles: [],
+  isContentReady: false,
+  contentError: null,
   selectedRoleCounts: {},
   playHistory: [],
   matchedRole: null,
@@ -120,31 +53,52 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
 
   startGame: () => {
     const { mode } = get();
-    const shuffledScenarios = shuffleArray(ALL_SCENARIOS);
     const initialTime = mode === 'school' ? GAME_CONSTANTS.TIMER_SCHOOL_SECONDS : GAME_CONSTANTS.TIMER_STAN_SECONDS;
-
-    set({
-      sessionId: `session_${Date.now()}`,
-      phase: 'playing',
-      scenarios: shuffledScenarios,
-      currentScenarioIndex: 0,
-      timeRemaining: initialTime,
-      score: 0,
-      streak: 0,
-      maxStreak: 0,
-      discoveredRolesCount: 0,
-      selectedRoleCounts: {},
-      playHistory: [],
-      matchedRole: null,
-      matchScorePercentage: 0,
-      activeRoleReveal: null,
-      isIdleOverlayVisible: false
+    return Promise.resolve().then(async () => {
+      let roles = get().roles;
+      let scenarios = get().scenarios;
+      if (!get().isContentReady) {
+        try {
+          const [fRoles, fScenarios] = await Promise.all([fetchRoles(), fetchScenarios()]);
+          roles = fRoles;
+          scenarios = fScenarios;
+        } catch {
+          roles = roles.length ? roles : [];
+          scenarios = scenarios.length ? scenarios : [];
+        }
+      }
+      if (!roles.length || !scenarios.length) {
+        set({ contentError: 'No content available. Please try again later.' });
+        return;
+      }
+      const shuffledScenarios = shuffleArray(scenarios);
+      set({
+        sessionId: `session_${Date.now()}`,
+        phase: 'playing',
+        roles,
+        scenarios: shuffledScenarios,
+        currentScenarioIndex: 0,
+        timeRemaining: initialTime,
+        score: 0,
+        streak: 0,
+        maxStreak: 0,
+        discoveredRolesCount: 0,
+        selectedRoleCounts: {},
+        playHistory: [],
+        matchedRole: null,
+        matchScorePercentage: 0,
+        activeRoleReveal: null,
+        isIdleOverlayVisible: false,
+        isContentReady: true,
+        contentError: null,
+      });
     });
   },
 
   answerScenario: (option: ScenarioOption) => {
-    const { scenarios, roles, currentScenarioIndex, score, streak, maxStreak, selectedRoleCounts, playHistory, discoveredRolesCount } = get();
+    const { scenarios, roles, currentScenarioIndex, score, streak, maxStreak, selectedRoleCounts, playHistory } = get();
     const currentScenario = scenarios[currentScenarioIndex];
+    if (!currentScenario) return;
 
     const isCorrect = option.isCorrect;
     const newStreak = isCorrect ? streak + 1 : 0;
@@ -168,7 +122,6 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
       }
     ];
 
-    // Find role data for reveal popup (Screen 3 GDD)
     const selectedRoleData = roles.find(r => r.id === option.roleId) || roles[0];
     const uniqueRolesDiscovered = Object.keys(newCounts).length;
 
@@ -203,9 +156,8 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
 
   tickTimer: () => {
     const { timeRemaining, phase, activeRoleReveal } = get();
-    // Only tick when actively playing AND no modal is blocking
     if (phase !== 'playing') return;
-    if (activeRoleReveal !== null) return; // BUG-4: pause timer during role reveal
+    if (activeRoleReveal !== null) return;
 
     if (timeRemaining <= 1) {
       get().finishGame();

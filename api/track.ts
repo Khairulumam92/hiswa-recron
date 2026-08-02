@@ -1,5 +1,4 @@
-// Vercel Serverless Function: POST /api/track
-// Increments anonymous aggregate counter for sector discovery stats
+import { createClient } from '@supabase/supabase-js';
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'POST') {
@@ -7,18 +6,25 @@ export default async function handler(req: any, res: any) {
   }
 
   try {
-    const { eventType, mode, matchedRoleId } = req.body || {};
+    const { eventType, mode, matchedRoleId, score } = req.body || {};
 
-    // Placeholder logic - when Vercel KV is configured:
-    // await kv.incr(`stats:${eventType}:${mode || 'general'}`);
-    // if (matchedRoleId) await kv.incr(`roles:${matchedRoleId}`);
+    const supabase = createClient(
+      process.env.SUPABASE_URL || '',
+      process.env.SUPABASE_SERVICE_ROLE_KEY || ''
+    );
 
-    return res.status(200).json({
-      success: true,
-      message: 'Event logged anonymously',
-      timestamp: new Date().toISOString(),
-      received: { eventType, mode, matchedRoleId }
+    const { error } = await supabase.from('aggregate_stats').insert({
+      event_type: eventType || 'unknown',
+      event_data: {
+        mode: mode || null,
+        role_id: matchedRoleId || null,
+        score: score || null,
+      },
     });
+
+    if (error) throw error;
+
+    return res.status(200).json({ success: true, event: eventType });
   } catch (error: any) {
     return res.status(500).json({ error: 'Failed to record event', details: error.message });
   }
