@@ -167,7 +167,7 @@ export const MapScreen: React.FC = () => {
 
       {/* Default prompt when nothing selected */}
       {!showDetail && (
-        <div className="hidden md:block absolute bottom-4 left-4 z-30 w-[320px] max-w-[calc(100%-2rem)]">
+        <div className="hidden md:block absolute bottom-20 left-4 z-30 w-[320px] max-w-[calc(100%-2rem)]">
           <div className="bg-white/95 backdrop-blur-md rounded-2xl shadow-xl p-5">
             <h3 className="font-black text-[#003e6f] text-lg mb-1">Kies je avontuur</h3>
             <p className="text-[#384454] text-[14px] leading-relaxed mb-3">Ontdek de wereld van recreatie. Tik op een locatie om te starten.</p>
