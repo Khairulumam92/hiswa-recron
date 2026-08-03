@@ -70,7 +70,7 @@ export const MijnPadModal: React.FC = () => {
 
             <div className="p-4 rounded-2xl bg-[#edf7e3] border border-[#2d6a04]/15 text-center">
               <div className="font-heading font-black text-2xl text-[#2d6a04] tabular-nums">
-                {discoveredRolesCount}/28
+                {discoveredRolesCount}/16
               </div>
               <div className="text-[11px] font-bold text-[#2d6a04]/80 uppercase tracking-wider mt-0.5">
                 Banen Ontdekt

@@ -108,7 +108,7 @@ export const MapScreen: React.FC = () => {
           <div className="bg-white/90 rounded-lg md:rounded-xl shadow-lg px-2.5 py-1.5 md:px-4 md:py-2.5 flex items-center gap-2 md:gap-3">
             <span className="material-symbols-outlined text-[#003e6f] text-[18px] md:text-[20px]" style={{ fontVariationSettings: "'FILL' 1" }}>explore</span>
             <div>
-              <div className="font-black text-[#003e6f] text-[13px] md:text-[15px] tabular-nums leading-none">{discoveredRolesCount}/28</div>
+              <div className="font-black text-[#003e6f] text-[13px] md:text-[15px] tabular-nums leading-none">{discoveredRolesCount}/16</div>
               <div className="text-[10px] md:text-[11px] text-[#5e6e85] font-bold">banen ontdekt</div>
             </div>
           </div>

@@ -4,7 +4,7 @@ import { RoleData } from '../../game/store/types';
 
 /**
  * BadgesModal — "Badges" tab view
- * Interactive gallery of all 28 beroepen across 6 categories.
+ * Interactive gallery of all 16 beroepen across 6 categories.
  * Unlocked roles show full details, skills, and career paths.
  */
 
@@ -42,7 +42,7 @@ export const BadgesModal: React.FC = () => {
             </div>
             <div>
               <h2 className="font-heading font-black text-xl text-white leading-tight flex items-center gap-2">
-                28 Beroepen & Badges Gallery
+                16 Beroepen & Badges Gallery
               </h2>
               <p className="text-white/80 text-xs mt-0.5">
                 Ontdek alle beroepen in de recreatie en watersport sector

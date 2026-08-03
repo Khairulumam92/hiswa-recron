@@ -17,7 +17,7 @@ const NAV_TABS: NavTab[] = [
 export const SiteHeader: React.FC = () => {
   const { navigateToHome, navigateToMap, activeTab, setActiveTab, discoveredRolesCount, phase } = useGameStore();
   const [isQRModalOpen, setIsQRModalOpen] = useState(false);
-  const pct = Math.max(4, Math.round((discoveredRolesCount / 28) * 100));
+  const pct = Math.max(4, Math.round((discoveredRolesCount / 16) * 100));
 
   const showNavTabs = phase === 'intro' || phase === 'map' || phase === 'result';
 
@@ -108,13 +108,13 @@ export const SiteHeader: React.FC = () => {
               />
             </div>
             <span className="font-heading font-bold text-white text-[13px] tabular-nums whitespace-nowrap">
-              {discoveredRolesCount}/28 banen ontdekt
+              {discoveredRolesCount}/16 banen ontdekt
             </span>
           </div>
 
           {/* Mobile: compact counter */}
           <span className="sm:hidden font-heading font-bold text-white text-[13px] tabular-nums">
-            {discoveredRolesCount}/28
+            {discoveredRolesCount}/16
           </span>
 
           {/* QR Code Quick Button */}

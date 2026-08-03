@@ -76,7 +76,7 @@ export const SiteFooter: React.FC = () => {
             </li>
             <li>
               <a href="#" onClick={(e) => e.preventDefault()}>
-                Alle 28 beroepen
+                Alle 16 beroepen
               </a>
             </li>
             <li>
