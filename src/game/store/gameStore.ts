@@ -64,17 +64,15 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
     const { mode } = get();
     const initialTime = mode === 'school' ? GAME_CONSTANTS.TIMER_SCHOOL_SECONDS : GAME_CONSTANTS.TIMER_STAN_SECONDS;
     return Promise.resolve().then(async () => {
-      let roles = get().roles;
-      let scenarios = get().scenarios;
-      if (!get().isContentReady) {
-        try {
-          const [fRoles, fScenarios] = await Promise.all([fetchRoles(), fetchScenarios()]);
-          roles = fRoles.length ? fRoles : FALLBACK_ROLES;
-          scenarios = fScenarios.length ? fScenarios : FALLBACK_SCENARIOS;
-        } catch {
-          roles = FALLBACK_ROLES;
-          scenarios = FALLBACK_SCENARIOS;
-        }
+      let roles: RoleData[] = [];
+      let scenarios: ScenarioData[] = [];
+      try {
+        const [fRoles, fScenarios] = await Promise.all([fetchRoles(), fetchScenarios()]);
+        roles = fRoles.length ? fRoles : FALLBACK_ROLES;
+        scenarios = fScenarios.length ? fScenarios : FALLBACK_SCENARIOS;
+      } catch {
+        roles = FALLBACK_ROLES;
+        scenarios = FALLBACK_SCENARIOS;
       }
       if (!roles.length || !scenarios.length) {
         set({ contentError: 'No content available. Please try again later.' });
