@@ -22,7 +22,7 @@ const SECTORS = [
 ];
 
 const STATS = [
-  { value: '28', label: 'beroepen in de sector' },
+  { value: '16', label: 'beroepen in de sector' },
   { value: '3.000+', label: 'recreatiebedrijven' },
   { value: '60.000', label: 'mensen werkzaam' },
 ];
@@ -77,7 +77,7 @@ export const IntroScreen: React.FC = () => {
           {/* Subtitle */}
           <p className="text-[#384454] text-base sm:text-lg leading-relaxed mb-6 max-w-[480px]">
             Verken de isometrische wereld van het vakantiepark, help medewerkers bij echte situaties en ontdek welke van de{' '}
-            <strong className="text-[#003e6f] font-black">28 recreatieberoepen</strong> bij jouw talenten past.
+            <strong className="text-[#003e6f] font-black">16 recreatieberoepen</strong> bij jouw talenten past.
           </p>
 
           {/* Mode Selector */}
@@ -128,7 +128,7 @@ export const IntroScreen: React.FC = () => {
               className="btn-primary animate-pulse-glow justify-center py-3.5 px-7 shadow-lg text-base"
             >
               <span className="material-symbols-outlined text-[24px]">map</span>
-              Ontdek de interatieve kaart
+              Ontdek de interactieve kaart
             </button>
             <button
               onClick={() => startGame()}
@@ -234,7 +234,7 @@ export const IntroScreen: React.FC = () => {
                 Ontdek 6 Hoofdsectoren
               </p>
               <span className="text-xs font-bold text-[#003e6f] flex items-center gap-1">
-                <span className="material-symbols-outlined text-sm">work</span> 28 Beroepen
+                <span className="material-symbols-outlined text-sm">work</span>                 16 Beroepen
               </span>
             </div>
 

@@ -152,29 +152,34 @@ export function AdminScenarioEditor() {
       is_active: true,
     };
 
+    const optionRows = options.map((opt, i) => ({
+      scenario_id: scenarioId,
+      role_id: opt.roleId,
+      label: opt.label,
+      is_correct: opt.isCorrect,
+      sort_order: i,
+    }));
+
     try {
       if (isEditing) {
-        await supabase.from('scenarios').update(scenarioPayload).eq('id', id);
-        await supabase.from('scenario_options').delete().eq('scenario_id', id);
+        const { error: updErr } = await supabase.from('scenarios').update(scenarioPayload).eq('id', id);
+        if (updErr) throw updErr;
+        const { error: delErr } = await supabase.from('scenario_options').delete().eq('scenario_id', id);
+        if (delErr) throw delErr;
       } else {
-        await supabase.from('scenarios').insert(scenarioPayload);
+        const { error: insErr } = await supabase.from('scenarios').insert(scenarioPayload);
+        if (insErr) throw insErr;
       }
 
-      const optionRows = options.map((opt, i) => ({
-        scenario_id: scenarioId,
-        role_id: opt.roleId,
-        label: opt.label,
-        is_correct: opt.isCorrect,
-        sort_order: i,
-      }));
-
-      await supabase.from('scenario_options').insert(optionRows);
+      const { error: optErr } = await supabase.from('scenario_options').insert(optionRows);
+      if (optErr) throw optErr;
+      
       setSuccessFlash(true);
-      setTimeout(() => navigate('/admin/scenarios'), 600);
+      setTimeout(() => navigate('/admin/scenarios'), 800);
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Save failed');
-    } finally {
       setSaving(false);
+      return;
     }
   };
 
@@ -191,10 +196,16 @@ export function AdminScenarioEditor() {
   }
 
   const difficultyConfig = {
-    easy: { label: 'Easy', color: 'emerald', icon: 'sentiment_satisfied', desc: 'Pagi — situasi jelas, peran mudah ditebak' },
-    medium: { label: 'Medium', color: 'amber', icon: 'psychology', desc: 'Siang — butuh sedikit pemikiran' },
-    hard: { label: 'Hard', color: 'rose', icon: 'mood_bad', desc: 'Sore — kompleks, perlu strategi' },
+    easy: { label: 'Easy', color: 'emerald', icon: 'sentiment_satisfied', desc: 'Ochtend — situatie is duidelijk, rol makkelijk te raden' },
+    medium: { label: 'Medium', color: 'amber', icon: 'psychology', desc: 'Middag — vereist enig nadenken' },
+    hard: { label: 'Hard', color: 'rose', icon: 'mood_bad', desc: 'Avond — complex, heeft strategie nodig' },
   } as const;
+
+  const difficultyLookup: Record<string, { active: string; icon: string }> = {
+    easy:   { active: 'border-emerald-500/50 bg-emerald-500/10 text-emerald-300 shadow-sm', icon: 'text-emerald-400' },
+    medium: { active: 'border-amber-500/50 bg-amber-500/10 text-amber-300 shadow-sm', icon: 'text-amber-400' },
+    hard:   { active: 'border-rose-500/50 bg-rose-500/10 text-rose-300 shadow-sm', icon: 'text-rose-400' },
+  };
 
   const dc = difficultyConfig[difficulty];
 
@@ -356,11 +367,11 @@ export function AdminScenarioEditor() {
                           onClick={() => setDifficulty(key)}
                           className={`flex-1 flex flex-col items-center gap-1 px-3 py-2.5 rounded-lg border text-xs font-semibold transition-all ${
                             active
-                              ? `border-${item.color}-500/50 bg-${item.color}-500/10 text-${item.color}-300 shadow-sm`
+                              ? difficultyLookup[key]?.active || 'border-indigo-500/50 bg-indigo-500/10 text-indigo-300 shadow-sm'
                               : 'border-slate-700 bg-[#0F172A] text-slate-500 hover:border-slate-600 hover:text-slate-400'
                           }`}
                         >
-                          <span className={`material-symbols-outlined text-[16px] ${active ? `text-${item.color}-400` : ''}`}>
+                          <span className={`material-symbols-outlined text-[16px] ${active ? difficultyLookup[key]?.icon || '' : ''}`}>
                             {item.icon}
                           </span>
                           {item.label}

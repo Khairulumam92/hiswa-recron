@@ -175,7 +175,7 @@ export function AdminDashboard() {
           accentColor="#A855F7"
           bgGradient="from-[#7E22CE]/20 to-[#A855F7]/5"
           borderColor="#A855F7/30"
-          subtext="Van de 28 beschikbare functies"
+          subtext="Van de 16 beschikbare functies"
         />
       </div>
 

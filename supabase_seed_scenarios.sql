@@ -42,7 +42,7 @@ insert into scenario_options (scenario_id, role_id, label, is_correct, sort_orde
 ('S001', 'animator', 'De familie uitnodigen voor de kinderdisco', false, 2),
 ('S001', 'receptionist', 'Nieuwe sleutels geven voor een chalet op het land', false, 3),
 -- S002
-('S002', 'receptionist', 'Frontoffice Coördinator die snel en vriendelijk in het Duits/Engels de incheck stroomlijnt', true, 0),
+('S002', 'receptionist', 'Frontoffice & Gastvrijheid Coordinator die snel en vriendelijk in het Duits/Engels de incheck stroomlijnt', true, 0),
 ('S002', 'bootmonteur', 'De motorolie van de reddingsboot controleren', false, 1),
 ('S002', 'hafenmeister', 'Iedereen naar een ligplaats aan de steiger sturen', false, 2),
 ('S002', 'animator', 'Direct starten met een speurtocht', false, 3),

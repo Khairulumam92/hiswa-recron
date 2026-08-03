@@ -11,14 +11,15 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'robots.txt', 'icons/*.png'],
+      includeAssets: ['favicon.svg', 'icons/*.png'],
       manifest: {
         name: 'HISWA-RECRON Career Discovery Game',
         short_name: 'HISWA-RECRON',
-        description: 'Ontdek jouw toekomst in de watersport en recreatie sektor!',
-        theme_color: '#0A2540',
+        description: 'Ontdek jouw toekomst in de watersport en recreatie sector!',
+        theme_color: '#003E6F',
         background_color: '#0F172A',
         display: 'standalone',
+        lang: 'nl',
         icons: [
           {
             src: '/icons/icon-192.png',
