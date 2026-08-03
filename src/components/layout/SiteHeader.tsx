@@ -3,12 +3,13 @@ import { useGameStore } from '../../game/store/gameStore';
 import { QRCodeModal } from '../navigation/QRCodeModal';
 
 type NavTab = {
-  id: 'ontdekken' | 'pad' | 'badges';
+  id: 'home' | 'ontdekken' | 'pad' | 'badges';
   label: string;
   icon: string;
 };
 
 const NAV_TABS: NavTab[] = [
+  { id: 'home',      label: 'Home',     icon: 'home' },
   { id: 'ontdekken', label: 'Ontdekken', icon: 'explore' },
   { id: 'pad',       label: 'Mijn Pad',  icon: 'route' },
   { id: 'badges',    label: 'Badges',    icon: 'military_tech' },
@@ -23,7 +24,9 @@ export const SiteHeader: React.FC = () => {
 
   const handleNavClick = (tab: NavTab) => {
     setActiveTab(tab.id);
-    if (tab.id === 'ontdekken' && phase === 'intro') {
+    if (tab.id === 'home') {
+      navigateToHome();
+    } else if (tab.id === 'ontdekken' && phase !== 'map') {
       navigateToMap();
     }
   };
@@ -34,22 +37,8 @@ export const SiteHeader: React.FC = () => {
         className="h-[56px] flex items-center justify-between px-4 sm:px-6 gap-4"
         style={{ maxWidth: '1400px', margin: '0 auto', width: '100%' }}
       >
-        {/* ── LEFT: Brand & Back to Home ───────────────────── */}
+        {/* ── LEFT: Brand ───────────────────────────────────── */}
         <div className="flex items-center gap-2">
-          {phase !== 'intro' && (
-            <button
-              onClick={() => {
-                setActiveTab('ontdekken');
-                navigateToHome();
-              }}
-              className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors text-xs font-heading font-bold mr-1"
-              title="Terug naar Home"
-            >
-              <span className="material-symbols-outlined text-[16px]">arrow_back</span>
-              <span className="hidden sm:inline">Home</span>
-            </button>
-          )}
-
           <button
             onClick={() => {
               setActiveTab('ontdekken');
@@ -93,9 +82,6 @@ export const SiteHeader: React.FC = () => {
             })}
           </nav>
         )}
-
-        {/* Spacer when no nav (playing phase) */}
-        {!showNavTabs && <div className="flex-1" />}
 
         {/* ── RIGHT: Progress + user ───────────────────────── */}
         <div className="flex items-center gap-3 shrink-0">

@@ -18,8 +18,11 @@ export const MijnPadModal: React.FC = () => {
     matchedRole,
     setActiveTab,
     startGame,
-    navigateToMap
+    navigateToMap,
+    phase
   } = useGameStore();
+
+  const closeTab = () => setActiveTab(phase === 'intro' ? 'home' : 'ontdekken');
 
   const totalPlayed = playHistory.length;
   const correctPlayed = playHistory.filter(h => h.isCorrect).length;
@@ -46,7 +49,7 @@ export const MijnPadModal: React.FC = () => {
           </div>
 
           <button
-            onClick={() => setActiveTab('ontdekken')}
+            onClick={closeTab}
             className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
             title="Sluiten"
           >
@@ -204,7 +207,7 @@ export const MijnPadModal: React.FC = () => {
             Bekijk Badges Gallery &rarr;
           </button>
           <button
-            onClick={() => setActiveTab('ontdekken')}
+            onClick={closeTab}
             className="btn-primary py-2 px-5 text-xs flex items-center gap-1.5"
           >
             Verder spelen

@@ -46,7 +46,7 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
   matchScorePercentage: 0,
 
   isIdleOverlayVisible: false,
-  activeTab: 'ontdekken',
+  activeTab: 'home',
 
   setActiveTab: (activeTab) => set({ activeTab }),
 
@@ -201,12 +201,13 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
       matchedRole: null,
       activeRoleReveal: null,
       timeRemaining: mode === 'school' ? GAME_CONSTANTS.TIMER_SCHOOL_SECONDS : GAME_CONSTANTS.TIMER_STAN_SECONDS,
-      isIdleOverlayVisible: false
+      isIdleOverlayVisible: false,
+      activeTab: 'home'
     });
   },
 
   showIdleOverlay: () => set({ isIdleOverlayVisible: true }),
   dismissIdleOverlay: () => set({ isIdleOverlayVisible: false }),
-  navigateToMap: () => set({ phase: 'map' }),
-  navigateToHome: () => set({ phase: 'intro' })
+  navigateToMap: () => set({ phase: 'map', activeTab: 'ontdekken' }),
+  navigateToHome: () => set({ phase: 'intro', activeTab: 'home' })
 }));

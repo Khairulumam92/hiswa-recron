@@ -76,9 +76,9 @@ export interface GameStoreState {
   // Idle Overlay State
   isIdleOverlayVisible: boolean;
 
-  // Active Tab State ('ontdekken' | 'pad' | 'badges')
-  activeTab: 'ontdekken' | 'pad' | 'badges';
-  setActiveTab: (tab: 'ontdekken' | 'pad' | 'badges') => void;
+  // Active Tab State ('home' | 'ontdekken' | 'pad' | 'badges')
+  activeTab: 'home' | 'ontdekken' | 'pad' | 'badges';
+  setActiveTab: (tab: 'home' | 'ontdekken' | 'pad' | 'badges') => void;
 
   // Actions
   setMode: (mode: GameMode) => void;

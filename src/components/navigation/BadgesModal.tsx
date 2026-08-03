@@ -19,9 +19,11 @@ const CATEGORIES = [
 ];
 
 export const BadgesModal: React.FC = () => {
-  const { roles, selectedRoleCounts, setActiveTab } = useGameStore();
+  const { roles, selectedRoleCounts, setActiveTab, phase } = useGameStore();
   const [selectedCategory, setSelectedCategory] = useState<string>('Alle');
   const [selectedRoleDetail, setSelectedRoleDetail] = useState<RoleData | null>(null);
+
+  const closeTab = () => setActiveTab(phase === 'intro' ? 'home' : 'ontdekken');
 
   // Filter roles by category
   const filteredRoles = selectedCategory === 'Alle'
@@ -51,7 +53,7 @@ export const BadgesModal: React.FC = () => {
           </div>
 
           <button
-            onClick={() => setActiveTab('ontdekken')}
+            onClick={closeTab}
             className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors"
             title="Sluiten"
           >
@@ -181,7 +183,7 @@ export const BadgesModal: React.FC = () => {
             Bekijk Mijn Ontdekkingspad
           </button>
           <button
-            onClick={() => setActiveTab('ontdekken')}
+            onClick={closeTab}
             className="btn-primary py-2 px-5 text-xs flex items-center gap-1.5"
           >
             Sluiten
