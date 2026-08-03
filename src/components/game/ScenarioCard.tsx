@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useGameStore } from '../../game/store/gameStore';
 import { ScenarioOption } from '../../game/store/types';
 import { RoleRevealModal } from './RoleRevealModal';
@@ -91,6 +91,16 @@ export const ScenarioCard: React.FC = () => {
 
   const scenario = scenarios[currentScenarioIndex] ?? scenarios[0];
   const totalScenarios = scenarios.length;
+
+  const shuffledOptions = useMemo(() => {
+    if (!scenario) return [];
+    const opts = [...scenario.options];
+    for (let i = opts.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [opts[i], opts[j]] = [opts[j], opts[i]];
+    }
+    return opts;
+  }, [scenario]);
 
   const timePct = Math.max(0, Math.round((timeRemaining / 120) * 100));
   const isUrgent  = timeRemaining <= 20;
@@ -278,7 +288,7 @@ export const ScenarioCard: React.FC = () => {
             Wie stuur jij erop af?
           </p>
 
-          {scenario.options.map((opt, i) => {
+          {shuffledOptions.map((opt, i) => {
             const isDone         = !!selected;
             const isThisSelected = selected?.roleId === opt.roleId;
             const showCorrect    = isDone && opt.isCorrect;
