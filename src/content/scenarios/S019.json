@@ -1,0 +1,16 @@
+{
+  "id": "S019",
+  "timeOfDay": "08:15 - Ochtend",
+  "location": "Technisch Magazijn",
+  "title": "De waterpomp van het park is uitgevallen!",
+  "description": "De hoofdpomp die alle bungalows van water voorziet is plotseling gestopt. Gasten kunnen niet douchen en het is hoogseizoen.",
+  "difficulty": "medium",
+  "correctRoleId": "technischdienst",
+  "options": [
+    { "roleId": "technischdienst", "label": "Technisch Dienst medewerker die de pomp demonteert en het lek vindt", "isCorrect": true },
+    { "roleId": "marketing", "label": "Marketing medewerker die een noodbericht plaatst op Facebook", "isCorrect": false },
+    { "roleId": "kok", "label": "Kok die flessen water uitdeelt in het restaurant", "isCorrect": false },
+    { "roleId": "gastenservice", "label": "Gastenservice die alle bungalows belt met een update", "isCorrect": false }
+  ],
+  "feedbackText": "Uitstekend! De technisch dienst vindt een gebarsten afdichtring en de waterpomp draait weer op volle kracht!"
+}

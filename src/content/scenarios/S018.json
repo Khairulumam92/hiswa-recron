@@ -1,0 +1,16 @@
+{
+  "id": "S018",
+  "timeOfDay": "15:00 - Namiddag",
+  "location": "Evenementenhal",
+  "title": "De zomeravondmarkt moet in twee dagen opgezet worden!",
+  "description": "Een grote zomeravondmarkt met 40 kramen, live muziek en foodtrucks moet overmorgen plaatsvinden. De voorbereidingen zijn nog niet gestart.",
+  "difficulty": "medium",
+  "correctRoleId": "evenementenplanner",
+  "options": [
+    { "roleId": "evenementenplanner", "label": "Evenementenplanner die alle leveranciers belt en de logistiek opzet", "isCorrect": true },
+    { "roleId": "hovenier", "label": "Hovenier die extra planten neerzet op het terrein", "isCorrect": false },
+    { "roleId": "zeilinstructeur", "label": "Zeilinstructeur die een zeilwedstrijd voorstelt als vervanging", "isCorrect": false },
+    { "roleId": "technischdienst", "label": "Technisch dienst die lampen vervangt in de toiletten", "isCorrect": false }
+  ],
+  "feedbackText": "Fantastisch! De evenementenplanner regelt alles op tijd — de zomeravondmarkt is een groot succes!"
+}

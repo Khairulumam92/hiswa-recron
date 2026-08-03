@@ -1,0 +1,16 @@
+{
+  "id": "S023",
+  "timeOfDay": "09:30 - Ochtend",
+  "location": "Camping Receptie",
+  "title": "Een camper is vastgelopen in de modder!",
+  "description": "Na een nacht regen is het terrein drassig geworden. Een grote camper is vastgelopen op veld 12 en blokkeert de weg voor andere gasten.",
+  "difficulty": "medium",
+  "correctRoleId": "hovenier",
+  "options": [
+    { "roleId": "hovenier", "label": "Hovenier die met de trekker en sleepkabel de camper lostrekt", "isCorrect": true },
+    { "roleId": "receptionist", "label": "Receptionist die de gasten een gratis upgrade aanbiedt", "isCorrect": false },
+    { "roleId": "kok", "label": "Kok die soep brengt naar de gestrande camper", "isCorrect": false },
+    { "roleId": "animator", "label": "Animator die een spelletje organiseert bij de camper", "isCorrect": false }
+  ],
+  "feedbackText": "Top! De hovenier trekt de camper los met de trekker — de weg is weer vrij en de camping draait verder!"
+}

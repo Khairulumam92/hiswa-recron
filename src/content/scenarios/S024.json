@@ -1,0 +1,16 @@
+{
+  "id": "S024",
+  "timeOfDay": "12:30 - Middag",
+  "location": "Restaurant Terras",
+  "title": "Een recensent van een reismagazine dineert vanavond!",
+  "description": "Een bekende restaurant-recensent heeft gereserveerd voor vanavond. Alles aan de service en het menu moet perfect zijn.",
+  "difficulty": "hard",
+  "correctRoleId": "kok",
+  "options": [
+    { "roleId": "kok", "label": "Kok die een speciaal driegangenmenu maakt met lokale streekproducten", "isCorrect": true },
+    { "roleId": "marketing", "label": "Marketing die een persbericht opstelt over het bezoek", "isCorrect": false },
+    { "roleId": "hovenier", "label": "Hovenier die verse bloemen op tafel zet", "isCorrect": false },
+    { "roleId": "gastenservice", "label": "Gastenservice die het tafellinnen verwisselt", "isCorrect": false }
+  ],
+  "feedbackText": "Uitstekend! De recensent is diep onder de indruk van het menu en schrijft een lovende recensie!"
+}

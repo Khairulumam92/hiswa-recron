@@ -1,0 +1,16 @@
+{
+  "id": "S020",
+  "timeOfDay": "11:00 - Ochtend",
+  "location": "Jachthaven Brug",
+  "title": "Een brugdefect blokkeert de doorvaart!",
+  "description": "De ophaalbrug bij de jachthaven weigert open te gaan. Vijf boten liggen te wachten aan beide kanten en de schippers worden ongeduldig.",
+  "difficulty": "hard",
+  "correctRoleId": "havenmeester",
+  "options": [
+    { "roleId": "havenmeester", "label": "Havenmeester die de noodprocedure start en de monteur van de brugbeheerder belt", "isCorrect": true },
+    { "roleId": "hafenmeister", "label": "Hafenmeister die alternatieve ligplaatsen in de andere haven regelt", "isCorrect": false },
+    { "roleId": "zeilinstructeur", "label": "Zeilinstructeur die de boten aanmeert aan de wal", "isCorrect": false },
+    { "roleId": "receptionist", "label": "Receptionist die koffie brengt naar de wachtende schippers", "isCorrect": false }
+  ],
+  "feedbackText": "Perfect! De havenmeester activeert het noodprotocol en regelt via de marifoon een alternatieve route — alle boten kunnen doorvaren!"
+}

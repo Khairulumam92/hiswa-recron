@@ -1,5 +1,5 @@
 -- ============================================================
--- HISWA-RECRON Seed Data: 15 Scenarios + Options
+-- HISWA-RECRON Seed Data: 25 Scenarios + Options
 -- Copy-paste into Supabase SQL Editor & Run
 -- ============================================================
 
@@ -108,3 +108,69 @@ insert into scenario_options (scenario_id, role_id, label, is_correct, sort_orde
 ('S015', 'animator', 'Animator om extra taken op te pakken', false, 1),
 ('S015', 'receptionist', 'Receptionist om collega''s te bellen', false, 2),
 ('S015', 'marketing', 'Marketing voor een oproep op social media', false, 3);
+
+-- S016
+insert into scenarios (id, time_of_day, location, title, description, difficulty, correct_role_id, feedback_text, is_active) values
+('S016', '10:30 - Ochtend', 'Receptie', 'Een gast is zijn portemonnee kwijt!', 'Een gast belt in paniek vanaf het strand — zijn portemonnee is verdwenen. Hij weet niet bij wie hij moet zijn.', 'easy', 'gastenservice', 'Top! De gastenservice medewerker vindt de portemonnee bij gevonden voorwerpen en de gast is dolgelukkig!', true),
+('S017', '13:30 - Middag', 'Social Media Kantoor', 'Een viral TikTok is nodig voor het weekend!', 'De marketingafdeling merkt dat de jonge doelgroep afhaakt op social media. Er moet snel een nieuwe trend gestart worden.', 'medium', 'socialmedia', 'Perfect! De TikTok-tour gaat viral en het park wordt door Gen-Z ontdekt!', true),
+('S018', '15:00 - Namiddag', 'Evenementenhal', 'De zomeravondmarkt moet in twee dagen opgezet worden!', 'Een grote zomeravondmarkt met 40 kramen, live muziek en foodtrucks moet overmorgen plaatsvinden. De voorbereidingen zijn nog niet gestart.', 'medium', 'evenementenplanner', 'Fantastisch! De evenementenplanner regelt alles op tijd — de zomeravondmarkt is een groot succes!', true),
+('S019', '08:15 - Ochtend', 'Technisch Magazijn', 'De waterpomp van het park is uitgevallen!', 'De hoofdpomp die alle bungalows van water voorziet is plotseling gestopt. Gasten kunnen niet douchen en het is hoogseizoen.', 'medium', 'technischdienst', 'Uitstekend! De technisch dienst vindt een gebarsten afdichtring en de waterpomp draait weer op volle kracht!', true),
+('S020', '11:00 - Ochtend', 'Jachthaven Brug', 'Een brugdefect blokkeert de doorvaart!', 'De ophaalbrug bij de jachthaven weigert open te gaan. Vijf boten liggen te wachten aan beide kanten en de schippers worden ongeduldig.', 'hard', 'havenmeester', 'Perfect! De havenmeester activeert het noodprotocol en regelt via de marifoon een alternatieve route — alle boten kunnen doorvaren!', true),
+('S021', '14:00 - Middag', 'Zeilschool', 'Cursisten willen hun eerste solo-zeiltocht maken!', 'Een groep van 8 cursisten heeft net hun theorie gehaald en wil vanmiddag solo oefenen. De omstandigheden zijn ideaal maar de veiligheid moet 100% gegarandeerd zijn.', 'medium', 'zeilinstructeur', 'Geweldig! De zeilinstructeur geeft de briefing en alle cursisten maken een veilige, onvergetelijke solo-tocht!', true),
+('S022', '16:45 - Namiddag', 'Park Management Kantoor', 'De jaarverslag moet naar de ledencommissie!', 'De ledencommissie van HISWA-RECRON komt morgen op bezoek. Het financiele jaarverslag en de bezettingscijfers moeten perfect gepresenteerd worden.', 'hard', 'parkmanager', 'Perfect! De parkmanager presenteert de cijfers met vertrouwen en de commissie is onder de indruk van de strategische plannen!', true),
+('S023', '09:30 - Ochtend', 'Camping Receptie', 'Een camper is vastgelopen in de modder!', 'Na een nacht regen is het terrein drassig geworden. Een grote camper is vastgelopen op veld 12 en blokkeert de weg voor andere gasten.', 'medium', 'hovenier', 'Top! De hovenier trekt de camper los met de trekker — de weg is weer vrij en de camping draait verder!', true),
+('S024', '12:30 - Middag', 'Restaurant Terras', 'Een recensent van een reismagazine dineert vanavond!', 'Een bekende restaurant-recensent heeft gereserveerd voor vanavond. Alles aan de service en het menu moet perfect zijn.', 'hard', 'kok', 'Uitstekend! De recensent is diep onder de indruk van het menu en schrijft een lovende recensie!', true),
+('S025', '07:30 - Ochtend', 'Zwembad Entree', 'De chlooropslag is bijna leeg en het is weekend!', 'Het is zaterdagochtend en de chloorvoorraad voor het subtropisch zwembad is bijna op. De leverancier is gesloten in het weekend.', 'medium', 'zwembadtechnicus', 'Perfect! De zwembadtechnicus regelt een noodvoorraad en het zwembad blijft open — het weekend is gered!', true);
+
+-- New scenario options (10 scenarios x 4 options each)
+insert into scenario_options (scenario_id, role_id, label, is_correct, sort_order) values
+-- S016
+('S016', 'gastenservice', 'Gastenservice medewerker die de gast kalmeert en de gevonden voorwerpen checkt', true, 0),
+('S016', 'bootmonteur', 'Bootmonteur die het strand afzoekt met een schroevendraaier', false, 1),
+('S016', 'hovenier', 'Hovenier die de bloembedden omploegt voor de portemonnee', false, 2),
+('S016', 'animator', 'Animator die een zoektocht voor kinderen organiseert', false, 3),
+-- S017
+('S017', 'socialmedia', 'Social Media Beheerder die een snelle behind-the-scenes tour video maakt voor TikTok', true, 0),
+('S017', 'kok', 'Kok die een kookvideo opneemt in de keuken', false, 1),
+('S017', 'receptionist', 'Receptionist die flyers print voor de ingang', false, 2),
+('S017', 'zwembadtechnicus', 'Zwembadtechnicus die de waterstand meet', false, 3),
+-- S018
+('S018', 'evenementenplanner', 'Evenementenplanner die alle leveranciers belt en de logistiek opzet', true, 0),
+('S018', 'hovenier', 'Hovenier die extra planten neerzet op het terrein', false, 1),
+('S018', 'zeilinstructeur', 'Zeilinstructeur die een zeilwedstrijd voorstelt als vervanging', false, 2),
+('S018', 'technischdienst', 'Technisch dienst die lampen vervangt in de toiletten', false, 3),
+-- S019
+('S019', 'technischdienst', 'Technisch Dienst medewerker die de pomp demonteert en het lek vindt', true, 0),
+('S019', 'marketing', 'Marketing medewerker die een noodbericht plaatst op Facebook', false, 1),
+('S019', 'kok', 'Kok die flessen water uitdeelt in het restaurant', false, 2),
+('S019', 'gastenservice', 'Gastenservice die alle bungalows belt met een update', false, 3),
+-- S020
+('S020', 'havenmeester', 'Havenmeester die de noodprocedure start en de monteur van de brugbeheerder belt', true, 0),
+('S020', 'hafenmeister', 'Hafenmeister die alternatieve ligplaatsen in de andere haven regelt', false, 1),
+('S020', 'zeilinstructeur', 'Zeilinstructeur die de boten aanmeert aan de wal', false, 2),
+('S020', 'receptionist', 'Receptionist die koffie brengt naar de wachtende schippers', false, 3),
+-- S021
+('S021', 'zeilinstructeur', 'Zeilinstructeur die de cursisten indeelt, de briefing geeft en de escort boot klaarmaakt', true, 0),
+('S021', 'bootmonteur', 'Bootmonteur die extra brandstof bijvult in alle boten', false, 1),
+('S021', 'animator', 'Animator die een strandpuzzeltocht organiseert als alternatief', false, 2),
+('S021', 'hafenmeister', 'Hafenmeister die alle steigers afzet met lint', false, 3),
+-- S022
+('S022', 'parkmanager', 'Parkmanager die het jaarverslag presenteert met strategische aanbevelingen voor volgend seizoen', true, 0),
+('S022', 'receptionist', 'Receptionist die een welkomstpakket klaarlegt voor de commissie', false, 1),
+('S022', 'socialmedia', 'Social Media beheerder die een Instagram story maakt van de commissie', false, 2),
+('S022', 'hovenier', 'Hovenier die de parkeerplaats versiert met bloemen', false, 3),
+-- S023
+('S023', 'hovenier', 'Hovenier die met de trekker en sleepkabel de camper lostrekt', true, 0),
+('S023', 'receptionist', 'Receptionist die de gasten een gratis upgrade aanbiedt', false, 1),
+('S023', 'kok', 'Kok die soep brengt naar de gestrande camper', false, 2),
+('S023', 'animator', 'Animator die een spelletje organiseert bij de camper', false, 3),
+-- S024
+('S024', 'kok', 'Kok die een speciaal driegangenmenu maakt met lokale streekproducten', true, 0),
+('S024', 'marketing', 'Marketing die een persbericht opstelt over het bezoek', false, 1),
+('S024', 'hovenier', 'Hovenier die verse bloemen op tafel zet', false, 2),
+('S024', 'gastenservice', 'Gastenservice die het tafellinnen verwisselt', false, 3),
+-- S025
+('S025', 'zwembadtechnicus', 'Zwembadtechnicus die de dosering aanpast en een noodvoorraad uit het naastgelegen park leent', true, 0),
+('S025', 'receptionist', 'Receptionist die een rood lint spant voor het zwembad', false, 1),
+('S025', 'camping_manager', 'Parkmanager die het zwembad sluit tot maandag', false, 2),
+('S025', 'animator', 'Animator die waterspelletjes in het meer organiseert', false, 3);

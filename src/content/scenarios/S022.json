@@ -1,0 +1,16 @@
+{
+  "id": "S022",
+  "timeOfDay": "16:45 - Namiddag",
+  "location": "Park Management Kantoor",
+  "title": "De jaarverslag moet naar de ledencommissie!",
+  "description": "De ledencommissie van HISWA-RECRON komt morgen op bezoek. Het financiële jaarverslag en de bezettingscijfers moeten perfect gepresenteerd worden.",
+  "difficulty": "hard",
+  "correctRoleId": "parkmanager",
+  "options": [
+    { "roleId": "parkmanager", "label": "Parkmanager die het jaarverslag presenteert met strategische aanbevelingen voor volgend seizoen", "isCorrect": true },
+    { "roleId": "receptionist", "label": "Receptionist die een welkomstpakket klaarlegt voor de commissie", "isCorrect": false },
+    { "roleId": "socialmedia", "label": "Social Media beheerder die een Instagram story maakt van de commissie", "isCorrect": false },
+    { "roleId": "hovenier", "label": "Hovenier die de parkeerplaats versiert met bloemen", "isCorrect": false }
+  ],
+  "feedbackText": "Perfect! De parkmanager presenteert de cijfers met vertrouwen en de commissie is onder de indruk van de strategische plannen!"
+}

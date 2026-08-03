@@ -1,0 +1,16 @@
+{
+  "id": "S016",
+  "timeOfDay": "10:30 - Ochtend",
+  "location": "Receptie",
+  "title": "Een gast is zijn portemonnee kwijt!",
+  "description": "Een gast belt in paniek vanaf het strand — zijn portemonnee is verdwenen. Hij weet niet bij wie hij moet zijn.",
+  "difficulty": "easy",
+  "correctRoleId": "gastenservice",
+  "options": [
+    { "roleId": "gastenservice", "label": "Gastenservice medewerker die de gast kalmeert en de gevonden voorwerpen checkt", "isCorrect": true },
+    { "roleId": "bootmonteur", "label": "Bootmonteur die het strand afzoekt met een schroevendraaier", "isCorrect": false },
+    { "roleId": "hovenier", "label": "Hovenier die de bloembedden omploegt voor de portemonnee", "isCorrect": false },
+    { "roleId": "animator", "label": "Animator die een zoektocht voor kinderen organiseert", "isCorrect": false }
+  ],
+  "feedbackText": "Top! De gastenservice medewerker vindt de portemonnee bij gevonden voorwerpen en de gast is dolgelukkig!"
+}

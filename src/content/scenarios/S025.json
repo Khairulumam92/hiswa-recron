@@ -1,0 +1,16 @@
+{
+  "id": "S025",
+  "timeOfDay": "07:30 - Ochtend",
+  "location": "Zwembad Entree",
+  "title": "De chlooropslag is bijna leeg en het is weekend!",
+  "description": "Het is zaterdagochtend en de chloorvoorraad voor het subtropisch zwembad is bijna op. De leverancier is gesloten in het weekend.",
+  "difficulty": "medium",
+  "correctRoleId": "zwembadtechnicus",
+  "options": [
+    { "roleId": "zwembadtechnicus", "label": "Zwembadtechnicus die de dosering aanpast en een noodvoorraad uit het naastgelegen park leent", "isCorrect": true },
+    { "roleId": "receptionist", "label": "Receptionist die een rood lint spant voor het zwembad", "isCorrect": false },
+    { "roleId": "camping_manager", "label": "Parkmanager die het zwembad sluit tot maandag", "isCorrect": false },
+    { "roleId": "animator", "label": "Animator die waterspelletjes in het meer organiseert", "isCorrect": false }
+  ],
+  "feedbackText": "Perfect! De zwembadtechnicus regelt een noodvoorraad en het zwembad blijft open — het weekend is gered!"
+}

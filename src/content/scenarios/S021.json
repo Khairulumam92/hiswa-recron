@@ -1,0 +1,16 @@
+{
+  "id": "S021",
+  "timeOfDay": "14:00 - Middag",
+  "location": "Zeilschool",
+  "title": "Cursisten willen hun eerste solo-zeiltocht maken!",
+  "description": "Een groep van 8 cursisten heeft net hun theorie gehaald en wil vanmiddag solo oefenen. De omstandigheden zijn ideaal maar de veiligheid moet 100% gegarandeerd zijn.",
+  "difficulty": "medium",
+  "correctRoleId": "zeilinstructeur",
+  "options": [
+    { "roleId": "zeilinstructeur", "label": "Zeilinstructeur die de cursisten indeelt in boten, de briefing geeft en de escort boot klaarmaakt", "isCorrect": true },
+    { "roleId": "bootmonteur", "label": "Bootmonteur die extra brandstof bijvult in alle boten", "isCorrect": false },
+    { "roleId": "animator", "label": "Animator die een strandpuzzeltocht organiseert als alternatief", "isCorrect": false },
+    { "roleId": "hafenmeister", "label": "Hafenmeister die alle steigers afzet met lint", "isCorrect": false }
+  ],
+  "feedbackText": "Geweldig! De zeilinstructeur geeft de briefing en alle cursisten maken een veilige, onvergetelijke solo-tocht!"
+}

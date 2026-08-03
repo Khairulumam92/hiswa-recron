@@ -1,0 +1,16 @@
+{
+  "id": "S017",
+  "timeOfDay": "13:30 - Middag",
+  "location": "Social Media Kantoor",
+  "title": "Een viral TikTok is nodig voor het weekend!",
+  "description": "De marketingafdeling merkt dat de jonge doelgroep afhaakt op social media. Er moet snel een nieuwe trend gestart worden.",
+  "difficulty": "medium",
+  "correctRoleId": "socialmedia",
+  "options": [
+    { "roleId": "socialmedia", "label": "Social Media Beheerder die een snelle behind-the-scenes tour video maakt voor TikTok", "isCorrect": true },
+    { "roleId": "kok", "label": "Kok die een kookvideo opneemt in de keuken", "isCorrect": false },
+    { "roleId": "receptionist", "label": "Receptionist die flyers print voor de ingang", "isCorrect": false },
+    { "roleId": "zwembadtechnicus", "label": "Zwembadtechnicus die de waterstand meet", "isCorrect": false }
+  ],
+  "feedbackText": "Perfect! De TikTok-tour gaat viral en het park wordt door Gen-Z ontdekt!"
+}
