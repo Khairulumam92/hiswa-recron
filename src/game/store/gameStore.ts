@@ -78,7 +78,7 @@ export const useGameStore = create<GameStoreState>((set, get) => ({
         set({ contentError: 'No content available. Please try again later.' });
         return;
       }
-      const shuffledScenarios = shuffleArray(scenarios);
+      const shuffledScenarios = shuffleArray(scenarios).slice(0, GAME_CONSTANTS.MAX_SCENARIOS_PER_SESSION);
       set({
         sessionId: `session_${Date.now()}`,
         phase: 'playing',
